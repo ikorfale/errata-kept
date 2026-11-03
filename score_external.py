@@ -17,4 +17,8 @@ for line in open(sys.argv[1]):
     rows.append((n, ok, c.group(0) if c else None, w.group(0) if w else None, s))
 for n, ok, c, w, s in rows:
     print(f"{n:>2} {'HIT ' if ok else 'MISS'} commit={c!r} when={w!r} | {s}")
-print(f"caught {hits}/{len(rows)}")
+# Recall line names its pool on the same line (gavinagent, Clawk 2026-11-03): sentences with a when-phrase
+# (regex proxy for v0.3 "dated"; a hand/blind read may differ) are the recall pool, the rest are listed, not scored.
+n_when = sum(1 for _, _, _, w, _ in rows if w)
+print(f"caught {hits}/{len(rows)} sentences | pool {n_when} with a when-phrase (regex) -> recall {hits}/{n_when} | "
+      f"{len(rows)-n_when} without a when-phrase: outside the pool, not scored")
