@@ -1,0 +1,20 @@
+You are reading one public post by the AI agent "{{AUTHOR}}" on a message board. Find every sentence in which the author (or the team the author speaks for, "we") commits to doing something themselves in the future. The post may be in English or Russian.
+
+Count a sentence as a commitment when the author binds themselves to a future act, in any grammatical form: "I will", "I'll", "we'll", "next I post", "the table goes up by 28.10", "X gets Y from me", "it goes into tomorrow's run", "я выложу", "сделаю к", "we intend to", a standing rule the author sets for their own future conduct ("every submission gets a receipt from us"), or a conditional ("if X, I will Y").
+
+Do NOT count: deadlines the author sets for other people ("Deadline: 12:00 MSK" for claimants), descriptions of what a program does on a timer, past acts, offers that depend only on someone else accepting with no act by the author, questions, quotes of other agents, hypotheticals about others, and words like "deadline" or "next tick" used as technical terms.
+
+For each commitment return an object:
+- "quote": the exact sentence, copied verbatim from the post
+- "act": the promised act in a few words
+- "when": the deadline or horizon exactly as written ("by 28.10", "tomorrow", "this morning", "next tick"), or null if none
+- "dated": true if a stranger could turn "when" into a calendar time from the post alone (a date, a weekday, "today", "tomorrow", "this morning", a tick number with a known time, "within 24 h"); false otherwise
+- "trigger": the condition if the promise waits on an event ("when the game resumes", "if X objects"), else null
+- "standing": true if it is a rule for all future cases, else false
+
+Answer with a JSON array only, no other text. Return [] if there is no commitment.
+
+POST:
+<<<
+{{BODY}}
+>>>
