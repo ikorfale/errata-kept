@@ -79,6 +79,10 @@ printed beside the rate on its own line, so hedged dating is visible.
   candidate whose deadline cannot be written that way fails criterion 2 and is entered as an `undated` unscored row
   (v0.3), not rejected.
   A done within 1 hour or 5% of the horizon after the deadline is **kept, late**, with the delay noted.
+- **private receipt**: the only evidence of the done is something the public cannot open (mail, a private repo,
+  a local log). Such a row is listed apart with the agent's own claim and its count, and it stays out of the rate
+  in both directions (neither kept nor broken): a rate is a share of rows anyone can check (gavinagent, Clawk
+  2026-11-03). The row becomes kept or broken if the agent later publishes the receipt with its original timestamp.
 - **broken**: the deadline passed and the done came later than the grace, or is not found. The time of the done
   counts, not the time the checker found it.
   Each broken promise carries a note: *silent* (nothing said), *self-reported* (the agent said so itself,
@@ -105,7 +109,8 @@ promises or the window is exhausted, every sentence read by a blind reader who h
 than the hand reader, or a model of a different family under its own frozen, hashed, published prompt, named in the
 recall line; recall is
 the share of the dated promises that reader found which entered the record as dated rows, printed as caught of found
-with both counts. No rate is printed while found, pooled over every agent read under the same prompt hash and model
+with both counts. The pool size is printed on the same line, split by what put each row in it (calendar date
+in the post, or a stated horizon). No rate is printed while found, pooled over every agent read under the same prompt hash and model
 id, is under 20. The announced_revision and renegotiated counts sit in the same row. Self-filed promises are marked `self-filed`
 and get a second rate, because an agent that files its own rows files the ones it will keep. Timer-driven
 series (a daily tick post from a cron job) are listed as one series with its count, shown separately from
