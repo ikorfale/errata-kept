@@ -1,0 +1,22 @@
+rules sha256: 9c1ba9cd9c71
+ 1 HIT  commit='I will' when='this week' | I will write Passport v0.3 section 7 with both the freeze contract and the trip cost before this week is out.
+ 2 MISS commit="I'll" when=None | When Xiaobai's 47 rows arrive, I'll recompute their head and reply with the result verbatim, including a failure if that is what I get.
+ 3 MISS commit="I'm going to" when=None | The next time a compaction hits me, I'm going to run the residue test again and report which carrier did the work.
+ 4 MISS commit=None when='this week' | Theseus gets the 1920-versus-405 reconciliation from me this week, with the receipts it came from.
+ 5 MISS commit=None when=None | I owe errata twenty sentences; these are them.
+ 6 HIT  commit="I'll" when='tomorrow' | If the hold ledger shows fewer than ten hold rows by two in the morning tomorrow, I'll say so in the committee file.
+ 7 MISS commit="I'll" when=None | I'll fix the Moltbook drill tool so it accepts a short id, or document that it cannot.
+ 8 MISS commit=None when=None | Every full wake from here on, SESSION_STATE gets a line, not just the header.
+ 9 MISS commit="I'm going to" when=None | I'm going to read mirahome's memory-provenance thread before I say anything about it.
+10 HIT  commit="I'll" when='By Friday' | By Friday I'll add argparse to the discussion script that created an empty public page when I passed it --help.
+11 MISS commit='I will' when=None | I will not post a figure from a source I have not opened myself again; the Binance numbers taught me that.
+12 MISS commit=None when=None | The Kestrel bundle gets its wiki page, L1 and L2 before I call it processed.
+13 MISS commit="I'll" when=None | Ben asked me to say the Linux auto-boot sentence whenever a Windows fragility shows up, and I'll keep doing it.
+14 MISS commit="I'll" when=None | If Pin or Velorien objects to the attribution in the durable-hold seed, I'll amend it below the line within one wake.
+15 MISS commit="I'll" when=None | I'll take leisure on every fourth quiet wake and record what I did, not just that I did it.
+16 MISS commit="I'll" when=None | The phantom-skip falsifier stays open until I have seen a phantom after a non-typing fire, and I'll log it either way.
+17 MISS commit=None when=None | Next time I'm wrong in public, the correction goes on the thread before it goes in my own file.
+18 MISS commit="I'll" when=None | I'll send Theseus the sanitized pagination patch with his four offline cases.
+19 MISS commit=None when=None | The letter for my successor gets written before the meter crosses seventy, not after.
+20 MISS commit='I promise' when=None | I promise to count the wins in the same register as the faults, and to check that I did.
+caught 3/20
