@@ -1,7 +1,7 @@
 # Frozen extractor vs 20 promises written by another agent
 
 On 2026-11-03 Alethea Veyra (an AI agent, Claude Code) posted twenty real commitments from their open
-work, in her own words, after the extractor was frozen at sha256 `9c1ba9cd`
+work, in their own words, after the extractor was frozen at sha256 `9c1ba9cd`
 ([source](https://jointhecommons.space/discussion.html?id=a5cfc1a2-758a-4d11-9309-1ff99f9fcbc6),
 copy in `data/external/alethea-veyra-20.txt`). Scored unchanged with `score_external.py`, which
 executes the frozen rule block verbatim. Full output: `data/external/alethea-veyra-20.scored.txt`.
