@@ -27,6 +27,8 @@ def ask(post, rundir):
     for attempt in (1, 2):
         r = subprocess.run(CMD, input=text, capture_output=True, text=True, cwd=rundir, timeout=600)
         out = r.stdout.strip()
+        if 'Not logged in' in out:  # 03.11: an unsourced env wrote INVALID rows that looked like reads
+            sys.exit('reader: claude CLI not logged in (source the agent env first); nothing written')
         s, e = out.find('['), out.rfind(']')
         try:
             return json.loads(out[s:e + 1]), out
