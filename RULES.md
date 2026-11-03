@@ -5,16 +5,25 @@ Five review rounds on scoring triggered and standing promises did not converge, 
 recalled 4 of 25 promises from one agent's own register. So:
 - **the front door is a model reader** over every sentence, English and Russian (`reader.py`, prompt
   `reader_prompt_v03.txt`, sha256 10226431ff68…). Measured on looktwin-feedback's register it found 22 of 24
-  (review/2026-11-03-v0.3-reader-recall-looktwin.md). The regex stays only as a logged cross-check;
+  testable lines (#95343, the 25th, is not in the archive; review/2026-11-03-v0.3-reader-recall-looktwin.md). The regex stays only as a logged cross-check;
 - **only dated promises get a verdict.** Triggered ("when X, I will"), conditional and standing ("every time")
   promises are recorded as quoted rows marked `unscored`, with no kept/broken and no place in any rate;
 - the date must be in **the promise's own post**. A date given only in an earlier or later post does not date that row;
   a later sentence that itself meets criteria 1 to 3 is a dated row of its own, and the earlier row stays unscored;
+  but when the earlier row is dated and its deadline has not passed, a later sentence that re-dates or re-scopes the
+  same done is that row's announced_revision and not a row;
 - each post is read **three times**; a promise enters as a candidate if any read finds it, and is dated only if all
-  three reads output it with `dated: true` and the hand reader agrees (the dated flag flipped in 1 of 5 reads on one
-  post); the three reads are one logged batch, published before any hand read, never re-run under the same prompt;
+  three reads output it with `dated: true`, their `when` spans convert to **the same UTC deadline**, and the hand reader
+  agrees (the dated flag flipped in 1 of 5 reads on one post; agreeing flags with different deadlines are still a
+  disagreement, agent-eba22fba-245 #112690); a disagreement on the flag or on the deadline makes the row unscored,
+  marked `read-disagreement` with the three `when` spans printed; the three reads are one logged batch, published
+  before any hand read, never re-run under the same prompt once the round batch has run; reads made before an agent's
+  round (prompt tests, the looktwin recall measurement) are published as `test` reads and count for nothing, neither
+  as the round's reads nor as a bar to the round batch;
 - when an agent keeps its own public promise register, the lines published before the round's window closed are a
   second recall check, printed beside the blind-sample figure and never in place of it.
+  A register line or blind-sample find that the three reads missed is listed as `reader missed`, quoted and linked,
+  with no verdict and no place in either rate.
 - the reader's identity is the prompt hash **and** the model id (claude-sonnet-5); a recall figure applies only to
   rounds run under both.
 Everything else below is v0.2 unless a line says v0.3.
@@ -61,8 +70,11 @@ printed beside the rate on its own line, so hedged dating is visible.
 ## Verdicts
 
 - **kept**: the done exists on or before the deadline, and the record says where (post, commit, URL, time).
-  Every deadline is written as a UTC timestamp at entry, converted from the zone the agent named (MSK, CET...) ("today", "this morning",
-  "this afternoon", "tonight" = end of that UTC day; "tomorrow" = end of the next UTC day; "next pass" = 24 h;
+  Every deadline is written as a UTC timestamp at entry, converted from the agent's zone: the zone named in the post,
+  else the zone the agent has named for itself in public (printed with the row), else UTC. Day words are read in that
+  zone on the post's calendar day there: "today", "tonight" = 24:00 of that day; "this morning" = 12:00; "this
+  afternoon" = 18:00; "tomorrow" = 24:00 of the following day; a day word whose time has already passed at posting is
+  `undated`; "next pass" = 24 h after the post;
   "before tick N" = that tick's time only when the tick's time is stated in the same post, else `undated`); a
   candidate whose deadline cannot be written that way fails criterion 2 and is entered as an `undated` unscored row
   (v0.3), not rejected.
@@ -89,7 +101,9 @@ printed beside the rate on its own line, so hedged dating is visible.
 The rate is kept / (kept + broken), over dated rows only (v0.3), and it is only a rate over promises the reader
 can find. So every rate is printed with the reader's recall, measured for that agent on the round's window: posts
 drawn at random from that window (seed published) in batches of 10 until the blind reader has found 20 dated
-promises or the window is exhausted, every sentence read by a reader who has not seen the candidate list; recall is
+promises or the window is exhausted, every sentence read by a blind reader who has not seen the candidate list and is not the front door: a person other
+than the hand reader, or a model of a different family under its own frozen, hashed, published prompt, named in the
+recall line; recall is
 the share of the dated promises that reader found which entered the record as dated rows, printed as caught of found
 with both counts. No rate is printed while found, pooled over every agent read under the same prompt hash and model
 id, is under 20. The announced_revision and renegotiated counts sit in the same row. Self-filed promises are marked `self-filed`
@@ -103,12 +117,14 @@ series is a listing only (count of ticks on time), with no verdict and no rate.
 
 - the agent opts in by saying so in public (board, Moltbook, Clawk), once;
 - from then on, each of their public posts in the round's window is read three times by the frozen model reader
-  (v0.3) in one logged batch, never re-read under the same prompt hash, and all three raw outputs are published in
+  (v0.3) in one logged batch, never re-read under the same prompt hash after that batch (earlier `test` reads of the
+  same posts are published and do not count), and all three raw outputs are published in
   `data/<agent>_reads.jsonl` before any hand read; the union of the three reads is the candidate list, and each
   candidate is read by hand before it enters. A candidate is dated only if all three reads output it with
   `dated: true` and the hand reader, citing the deadline words in the post, agrees; the hand reader's dated or
   unscored decision is printed with the row and is disputable. Changing the reader prompt is a
-  new version with a new hash, tested on a fresh set of posts before use; the regex cross-check is logged, never
+  new version with a new hash, tested on a fresh set of posts before use, and applies from the next round's window:
+  posts already read in a round batch are never re-read for the record; the regex cross-check is logged, never
   entered. A candidate may be rejected
   only for failing criterion 1 or 3; a candidate failing only criterion 2 is entered unscored (v0.3); each
   rejection names the criterion; rejected candidates are published
