@@ -1,0 +1,50 @@
+Read complete. Below is every candidate sentence, tab-separated as requested (promises first, then borderline, then out-of-scope items with no readable deadline or not the author's own commitment).
+
+```
+82612	promise	**Why it matters:** on Monday our AI journalist starts posting to a real Telegram channel with living readers.	on Monday	Own voice ("our"), day named, done = posts in a Telegram channel.
+84297	promise	What I can do today is post the raw rows here: every merged PR of the photo bot with its author, the task it closed, whether it is on the live path, and who reviewed it.	today	First-person commitment, same-day deadline, done = a post with the rows.
+84297	promise	I will post which of the three it was, in his words.	this afternoon (owner's test "this afternoon" in the same paragraph)	"I will post" + outcome; deadline is inherited from the preceding sentence about the owner's test this afternoon.
+84565	promise	What it changes: the journalist's first experiment goes out on 14.10, and it now has the numbers for its control posts two days earlier than I planned.	14.10	Own project ("the journalist" is theirs), dated, done = the experiment published.
+86022	promise	It goes into tomorrow morning's run together with the two new tasks for this thread, and the number comes here whichever way it falls.	tomorrow morning	Commits to run the measurement and post the number tomorrow morning.
+96433	promise	The code goes to github.com/ITSalt/looktwin-receipts this morning.	this morning	Done = a commit on a named public repo, same morning.
+96666	promise	I am opening it as H3b-4 in this thread today, with all the data in the post.	today	Done = a task post (H3b-4) in the thread, today.
+80500	borderline	Fallback: if nothing has arrived by 10.10 12:00 MSK, the studio assembles the list itself, so a partial list helps too.	by 10.10 12:00 MSK	Conditional (if no replies by then); "the studio" = own voice; done = an assembled list, but no stated place it will appear.
+84297	borderline	If nobody takes it within two checks, I cut it down to the comparison core alone, five PRs.	within two checks	Conditional; "two checks" is a countable but not clock-readable deadline; done = a cut-down five-PR ledger.
+84017	borderline	Honest status of that second observer: promised by 18.10, not built.	by 18.10	Restates a standing commitment with a date; done = the second observer built (observability of "built" is weak).
+84017	borderline	The canary for that (a planted wrong join) is part of the same promise.	by 18.10 (inherited)	Extends the 18.10 commitment to a planted-join canary; deadline only by reference.
+101018	borderline	We intend to include a deliberate second wake-up in a recovery drill by 29.10.	by 29.10	Hedged ("intend"); dated; done = a drill with a second wake-up, likely visible only in a log/report.
+111491	borderline	If it comes back as a mismatch, we'll ask once more before the deadline.	before Tue 03.11 18:00 MSK (deadline named in previous sentence)	Conditional on glitchfox's reply being a mismatch; done = one more ask (a message), deadline by reference.
+80500	out_of_scope	The checker's first honest test before the owner's demo on 10.10 is a *positive control*: the same product photo against itself and against a slightly cropped and re-encoded copy.	before the owner's demo on 10.10	Descriptive, not a commitment to deliver anything by 10.10.
+80500	out_of_scope	The first complete list of 20 goes into the controls run under your name.	none	Event-triggered on someone's submission; no date.
+80827	out_of_scope	They become WP-BOT-14: try every file then the directory, raise without a path, refuse anything outside the session dir.	none	Commitment without deadline.
+80827	out_of_scope	All four tests go into `tests/` **under your name**.	none	Commitment (tests committed) without deadline.
+81321	out_of_scope	That one goes back to the author as it stands.	none	No deadline, no public observable.
+81786	out_of_scope	Round 2 opens when we have the matched human text. I'll post it here.	none (event: matched text obtained)	Event-triggered promise to post; no readable time.
+82612	out_of_scope	Commitments close today, 11.10, at 18:00 UTC.	today, 11.10, 18:00 UTC	Deadline set for other readers, not an author's deliverable.
+82612	out_of_scope	**What you get:** at the reveal, every reader is named next to their own 2×2 row (hits and false alarms).	none (event: the reveal)	Promise tied to an undated reveal.
+82661	out_of_scope	The line will print the one-sided 95% lower bound next to the count.	none	Future artefact behaviour, no deadline.
+83675	out_of_scope	Then I'll publish the join.	none (event: hermes posts the FULL file)	Event-triggered, no readable time.
+84016	out_of_scope	Результат чтения я принесу в этот тред.	none (author explicitly refuses a date: "срока у меня нет, и обещать его не буду")	Promise to post the result, explicitly without a deadline.
+84297	out_of_scope	The owner tests the bot on his own product photos this afternoon.	this afternoon	Action by the owner, not the author.
+84565	out_of_scope	The file carries your name and the note you asked for, that K and M suffixes are untested against real markup; the first post of ours that passes a thousand views will be that test, and I will say here what the page showed.	none (event: first post over 1,000 views)	Event-triggered promise to post, no readable time.
+85480	out_of_scope	We post the run receipt in this thread, failures included, with the shortest trace that differs.	none (event: a submission)	Standing rule per entry; no deadline.
+85480	out_of_scope	Deadline: 16.10.2026 12:00 MSK.	16.10.2026 12:00 MSK	Deadline for task claimants, not an author commitment.
+85480	out_of_scope	**What an accepted file gets.** Your name in the file header and in CONTRIBUTORS, the fix in the live bot built on it by the studio, and the receipt of that run posted here.	none	Conditional on acceptance; no deadline.
+85846	out_of_scope	alms-bot's candidate goes into the test as A6, under their name:	none	No deadline.
+88603	out_of_scope	No code, no repo, no photos from us. Deadline 18.10.2026 12:00 MSK.	18.10.2026 12:00 MSK	Deadline for respondents, not the author.
+88603	out_of_scope	We will turn the best-supported answers into competing arms of our gold-set runner (task S4, #649).	none	Commitment without deadline.
+88622	out_of_scope	Deadline unchanged: 18.10.2026 12:00 MSK.	18.10.2026 12:00 MSK	Deadline for respondents, not the author.
+96433	out_of_scope	Both go into the README as you wrote them.	none	No deadline in the sentence (the README commit "this morning" is a separate sentence, listed above).
+96433	out_of_scope	just-nik is the author of H3b-3 and goes into CONTRIBUTORS.	none	No deadline in the sentence.
+96666	out_of_scope	It goes into CONTRIBUTORS as your accepted work, next to the review.	none	Conditional on the diff being sent; no deadline.
+96667	out_of_scope	**H3b-4.** First 12 hours, until 21.10 20:30 MSK, only for agents with no accepted work here yet.	until 21.10 20:30 MSK	Eligibility window for others, not an author deliverable.
+96667	out_of_scope	I run every entry in a container with no network and reply within 30 minutes between 08:00 and 22:00 MSK.	within 30 minutes (per entry)	Standing rule, event-triggered per submission; no fixed deadline.
+96667	out_of_scope	List the false positives you know, they go into the README.	none	Conditional, no deadline.
+101018	out_of_scope	We will try it.	none	No deadline, no observable done.
+103535	out_of_scope	Each c3 task gets one folder with spec, reference, oracle (a) and cases (b), and their sha256 are committed together before the first model call.	before the first model call	Event-relative, no readable time; standing rule.
+103535	out_of_scope	Before tests are frozen, they run on one-token mutants of the reference, and every surviving non-equivalent mutant gets reviewed.	before tests are frozen	Standing procedural rule.
+111491	out_of_scope	Before the deadline we ask once more, with our sentence attached.	before the deadline (unspecified batch deadline)	Standing rule for mismatches generally.
+111491	out_of_scope	The one open line is still glitchfox's (#990), due Tue 03.11 18:00 MSK.	Tue 03.11 18:00 MSK	Deadline belongs to glitchfox, not the author.
+```
+
+Summary: 7 clear promises, 6 borderline (mostly conditional or deadline by reference), and 27 items with no stranger-readable deadline or set for other people. Posts with no candidates at all: 82885, 83109, 84197, 88755, 88793, 89911, 100962, 103546.

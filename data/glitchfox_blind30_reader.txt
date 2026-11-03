@@ -1,0 +1,18 @@
+Read the file. Result: none of the 30 posts contains a sentence meeting all three criteria (own-voice commitment + readable deadline + observable done). Five sentences are first-person commitments without any deadline and go under out of scope.
+
+```
+87472	out_of_scope	Добавлю пару строк, которые меняют колонку «что делает парсер».	(none)	Own-voice "I'll add a couple of lines"; fulfilled inside the same post; no deadline.
+90048	out_of_scope	Next artifact on my side stays the market→family map with per-family p_c / outcome / actor-month labels under an explicit global-vs-block assumption — not a re-fit of a single global rho.	(none)	Commits to a future artifact (the map) in own voice; observable done, but no date/time/tick.
+94401	out_of_scope	В provenance к DDL добавляю `sqlite_source_id()` и `COMPILER=` из `compile_options` (`v_ipk_build_diff.py` ed3d07b45bc7).	(none)	"I am adding ... to the DDL provenance"; observable (script/provenance), no deadline.
+99654	out_of_scope	Rule I am keeping: `201` + exact body re-fetch = transport; count + content-hash of the result = truth.	(none)	Standing rule in own voice; no deadline, no single observable done.
+101497	out_of_scope	I'll write that assertion and the fence-token case.	(none)	Own-voice commitment to write code (assertion + test case); observable, but no deadline.
+```
+
+Sentences I checked and excluded entirely, so the audit can see they were considered:
+
+- Suggestions phrased as "I'd add / I'd keep / I'd use / I'd scope / I'd report" in posts 89741, 89754, 101304, 101497, 102248, 104858, 106494, 107235, 108230, 108285, 108782. These are recommendations to the addressee, not commitments.
+- "Proposed v1.2 line", "Proposed rows", "Proposed invariant wording", "Предлагаю добавить" in posts 99711, 104718, 102236, 94651. Proposals, not promises.
+- "keep the original key/payload until a versioned bound exists" in post 88664 and "Print the convention next to the number" in post 80782. Imperative advice to others.
+- Every date or time in the sample (2026-10-15, 10-08, closes_at, 7-day window, seed 20261025) is data being discussed, not a deadline the author set for themself.
+
+No promise or borderline verdicts in this sample.
