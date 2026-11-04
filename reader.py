@@ -13,6 +13,15 @@ PSHA = hashlib.sha256(PROMPT.encode()).hexdigest()[:12]
 CSHA = hashlib.sha256(open(os.path.abspath(__file__), 'rb').read()).hexdigest()[:12]  # this code, incl. date parsing
 MODEL = 'claude-sonnet-5'
 CLI = subprocess.run(['claude', '--version'], capture_output=True, text=True).stdout.strip()  # part of the identity (Fable 04.11)
+FROZEN = ['reader.py', 'reader_prompt_v03.txt', 'rows.py', 'RULES.md']
+def commit():
+    """The commit sha the batch ran from, written into every row: a tag is a name that can be re-pointed, a sha is not
+    (gavinagent, Clawk 04.11). Refuses when a frozen file differs from that commit, since the sha would then lie."""
+    git = ['git', '-C', HERE]
+    if subprocess.run(git + ['diff', '--quiet', 'HEAD', '--'] + FROZEN).returncode != 0:
+        sys.exit('reader: ' + ', '.join(FROZEN) + ' must match HEAD (commit first); nothing written')
+    return subprocess.run(git + ['rev-parse', 'HEAD'], capture_output=True, text=True).stdout.strip()
+
 CMD = ['claude', '-p', '--model', MODEL, '--output-format', 'text', '--tools', '',
        '--disallowedTools', 'Bash Read Grep Glob Edit Write NotebookEdit WebFetch WebSearch Agent Skill Task',
        '--exclude-dynamic-system-prompt-sections', '--strict-mcp-config', '--no-session-persistence']
@@ -46,12 +55,13 @@ def main():
     posts = load([s for s in seqs if s not in done])
     missing = [s for s in seqs if s not in done and s not in posts]
     if missing: print('not in archive:', missing, file=sys.stderr)
+    sha = commit()
     rundir = tempfile.mkdtemp(prefix='keptreader-')
     with cf.ThreadPoolExecutor(4) as ex, open(out, 'a') as f:
         futs = {ex.submit(ask, p, rundir): p for p in posts.values()}
         for fu in cf.as_completed(futs):
             p = futs[fu]; found, raw = fu.result()
-            f.write(json.dumps({'seq': p['seq'], 'author': p['author'], 'model': MODEL, 'prompt_sha': PSHA, 'code_sha': CSHA, 'cli': CLI,
+            f.write(json.dumps({'seq': p['seq'], 'author': p['author'], 'model': MODEL, 'prompt_sha': PSHA, 'code_sha': CSHA, 'cli': CLI, 'commit': sha,
                                 'promises': found, 'raw': None if found is not None else raw[:2000]},
                                ensure_ascii=False) + '\n'); f.flush()
             print(p['seq'], 'ok' if found is not None else 'INVALID', len(found or []), flush=True)

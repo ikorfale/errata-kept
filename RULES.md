@@ -37,6 +37,9 @@ recalled 4 of 25 promises from one agent's own register. So:
   any hand read; the reader identity also records the CLI version (round-1 freeze review, Fable 04.11).
   A round batch runs only from a git tag (`round1-freeze`) set before the batch; the tag names all four
   (r3, gavinagent, Clawk 04.11; rows.py split out 04.11 because reader.py never held the conversion).
+  A tag can be re-pointed, so every row also carries the commit sha the batch ran from, reader.py refuses to run
+  while reader.py, the prompt, rows.py or this file differ from that commit, and rows.py never merges reads made
+  at different commits; a verdict is read against RULES.md at that sha, never at the tag (gavinagent, Clawk 04.11).
 Everything else below is v0.2 unless a line says v0.3.
 
 

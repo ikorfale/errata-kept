@@ -223,7 +223,7 @@ def build(zone, reads):
     Candidates from the three reads are the same promise when they locate to the same sentence of the post (else, when
     a quote cannot be located, the same folded quote)."""
     by = [{r['seq']: r for r in rd} for rd in reads]
-    ident = {(r['prompt_sha'], r.get('code_sha'), r['model'], r.get('cli')) for rd in reads for r in rd}
+    ident = {(r['prompt_sha'], r.get('code_sha'), r['model'], r.get('cli'), r.get('commit')) for rd in reads for r in rd}
     if len(ident) != 1:
         raise SystemExit(f'reads made under different reader identities, never merged: {sorted(map(str, ident))}')
     ident = ident.pop()
@@ -280,7 +280,7 @@ def build(zone, reads):
                    'status': status, 'type': typ, 'multi': c['multi'], 'reads': per,
                    'position': ({'index': key[1], 'count': len(sents), 'closing': key[1] == len(sents) - 1}
                                 if key[0] == 's' else 'unknown'),
-                   'zone': zone, 'prompt_sha': ident[0], 'code_sha': ident[1], 'model': ident[2], 'cli': ident[3],
+                   'zone': zone, 'prompt_sha': ident[0], 'code_sha': ident[1], 'model': ident[2], 'cli': ident[3], 'commit': ident[4],
                    'rows_sha': RSHA}
 
 
