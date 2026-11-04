@@ -119,4 +119,9 @@ und = {'quote': "I'll post the table by 05.11", 'when': None, 'dated': False}
 two = [und, q("with the code")]
 out = list(rows.build('UTC', [[dict(idn, seq=2, promises=two)], [dict(idn, seq=2, promises=[two[1]])], [dict(idn, seq=2, promises=[two[1]])]]))
 assert [(r['status'], r['multi']) for r in out] == [('hand-convert', True)], out  # multi wins over the flag check
+# the real board archive stores created_at as epoch seconds (found on the first real batch, 04.11)
+open(arch, 'w').write(json.dumps({'seq': 3, 'author': 'x', 'created_at': 1793784600,  # 2026-11-04T09:30:00Z
+    'body': "Intro. I'll post the table by 05.11. Thanks!"}) + '\n')
+out = list(rows.build('UTC', [[dict(idn, seq=3, promises=[q("I'll post the table by 05.11.")])]] * 3))
+assert (out[0]['status'], out[0]['created_at'], out[0]['reads'][0]['when_utc']) == ('dated', '2026-11-04T09:30:00+00:00', '2026-11-06T00:00:00+00:00'), out
 print('test_rows: review cases passed')

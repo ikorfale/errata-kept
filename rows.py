@@ -237,7 +237,9 @@ def build(zone, reads):
         post = posts.get(seq)
         if post is None:
             raise SystemExit(f'seq {seq} not in archive')
-        created = dt.datetime.fromisoformat(post['created_at'].replace('Z', '+00:00')).astimezone(dt.timezone.utc)
+        ca = post['created_at']  # the board archive stores epoch seconds; fixtures use ISO strings
+        created = (dt.datetime.fromtimestamp(ca, dt.timezone.utc) if isinstance(ca, (int, float))
+                   else dt.datetime.fromisoformat(ca.replace('Z', '+00:00')).astimezone(dt.timezone.utc))
         sents = sentences(post['body'], post['author'])
         cands = {}
         for k, b in enumerate(by):
