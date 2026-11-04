@@ -110,4 +110,13 @@ assert (out[0]['status'], out[0]['type']) == ('unscored', 'conditional'), out
 two = [q("I'll post the table by 05.11"), q("with the code")]
 out = list(rows.build('UTC', [[dict(idn, seq=2, promises=two)], [dict(idn, seq=2, promises=[two[0]])], [dict(idn, seq=2, promises=[two[0]])]]))
 assert (out[0]['status'], out[0]['multi']) == ('hand-convert', True), out
+# --- confirming review (Fable 04.11 r2) new blocking cases ---
+assert t('5.11 в 12.00.', 'MSK') == ('2026-11-05T09:00:00+00:00', 'dd.mm'), t('5.11 в 12.00.', 'MSK')  # final period
+assert t('2026-11-07 09:00-12:00 UTC') == (None, 'unparsed')     # a range, not a -12:00 offset
+assert t('2026-11-07 09:00-12:00') == (None, 'unparsed')
+assert t('2026-11-07T18:00-05:00') == ('2026-11-07T23:00:00+00:00', 'iso-dt')  # a real offset still works
+und = {'quote': "I'll post the table by 05.11", 'when': None, 'dated': False}
+two = [und, q("with the code")]
+out = list(rows.build('UTC', [[dict(idn, seq=2, promises=two)], [dict(idn, seq=2, promises=[two[1]])], [dict(idn, seq=2, promises=[two[1]])]]))
+assert [(r['status'], r['multi']) for r in out] == [('hand-convert', True)], out  # multi wins over the flag check
 print('test_rows: review cases passed')

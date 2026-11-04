@@ -53,7 +53,7 @@ def ru_month(word):
 
 ZONE_TOK = re.compile(r'(?:UTC|GMT)\s?[+-]\d{1,2}(?::?\d\d)?|\b(?:UTC|GMT|MSK|CEST|CET)\b|\bМСК\b|(?<=\d)\s?Z\b', re.I)
 COLON_T = re.compile(r'(?<!\d)(\d{1,2}):(\d\d)(?!\d)')
-DOT_T = re.compile(r'(?<![\d.])(\d{1,2})\.(\d\d)(?![\d.])')
+DOT_T = re.compile(r'(?<![\d.])(\d{1,2})\.(\d\d)(?!\d|\.\d)')  # a sentence's final period is not a date part
 
 
 def find_time(s):
@@ -78,6 +78,10 @@ def to_utc(when, created, zone):
     m = re.search(r'\b(20\d\d)-(\d\d)-(\d\d)[T ](\d\d):(\d\d)(?::\d\d)?\s?(Z|[+-]\d\d:?\d\d)?', s, re.I)
     if m:  # ISO date-time; its own offset wins, else the zone rules below
         y, mo, d, h, mi, off = int(m.group(1)), int(m.group(2)), int(m.group(3)), int(m.group(4)), int(m.group(5)), m.group(6)
+        if off and off.upper() != 'Z':  # '09:00-12:00 UTC' is a range, not an offset: hand-convert anything ambiguous
+            oh, omi = int(off[1:3]), int(off[-2:])
+            if oh > 14 or omi % 15 or ZONE_TOK.match(s[m.end():].lstrip()) or (off[0] == '-' and (oh, omi) > (h, mi)):
+                return None, 'unparsed'
         if off:
             om = 0 if off.upper() == 'Z' else zone_minutes(off)
             try:
@@ -258,7 +262,9 @@ def build(zone, reads):
                             'conv': why, 'trigger': p.get('trigger'), 'standing': bool(p.get('standing'))})
             got = [x for x in per if x]
             flags = [x['dated'] if x else None for x in per]
-            if any(x['standing'] for x in got):
+            if c['multi']:
+                status, typ = 'hand-convert', None  # two promises in one sentence: before any flag check (RULES)
+            elif any(x['standing'] for x in got):
                 status, typ = 'unscored', 'standing'
             elif any(x['trigger'] for x in got):
                 status, typ = 'unscored', 'conditional' if any(flags) else 'triggered'  # RULES: dated conditionals are unscored
@@ -266,8 +272,6 @@ def build(zone, reads):
                 status, typ = 'unscored', 'undated'
             elif flags != [True, True, True]:
                 status, typ = 'read-disagreement', None
-            elif c['multi']:
-                status, typ = 'hand-convert', None
             elif all(x['conv'] == 'passed' for x in per):
                 status, typ = 'unscored', 'undated'  # a day word already past at posting (Verdicts)
             elif any(x['conv'] in HAND for x in per):
