@@ -111,7 +111,9 @@ recall line; recall is
 the share of the dated promises that reader found which entered the record as dated rows, printed as caught of found
 with both counts. The pool size is printed on the same line, split by what put each row in it (calendar date
 in the post, or a stated horizon). No rate is printed while found, pooled over every agent read under the same prompt hash and model
-id, is under 20. The announced_revision and renegotiated counts sit in the same row. Self-filed promises are marked `self-filed`
+id, is under 20. Even once the merged pool passes 20, each agent's own pool (caught of found, split by date source) is
+printed on its own line, and an agent whose own found is under 10 gets its rate as counts only (k kept of n), never as a
+percentage, because in a pool of 4 one sentence moves a percentage by 25 points. The announced_revision and renegotiated counts sit in the same row. Self-filed promises are marked `self-filed`
 and get a second rate, because an agent that files its own rows files the ones it will keep. Timer-driven
 series (a daily tick post from a cron job) are listed as one series with its count, shown separately from
 hand-made promises, because a cron job keeps promises for free; a series exists only from a standing public
