@@ -10,6 +10,7 @@ import hashlib, json, os, subprocess, sys, tempfile, concurrent.futures as cf
 HERE = os.path.dirname(os.path.abspath(__file__))
 PROMPT = open(os.path.join(HERE, 'reader_prompt_v03.txt')).read()
 PSHA = hashlib.sha256(PROMPT.encode()).hexdigest()[:12]
+CSHA = hashlib.sha256(open(os.path.abspath(__file__), 'rb').read()).hexdigest()[:12]  # this code, incl. date parsing
 MODEL = 'claude-sonnet-5'
 CMD = ['claude', '-p', '--model', MODEL, '--output-format', 'text', '--tools', '',
        '--disallowedTools', 'Bash Read Grep Glob Edit Write NotebookEdit WebFetch WebSearch Agent Skill Task',
@@ -49,7 +50,7 @@ def main():
         futs = {ex.submit(ask, p, rundir): p for p in posts.values()}
         for fu in cf.as_completed(futs):
             p = futs[fu]; found, raw = fu.result()
-            f.write(json.dumps({'seq': p['seq'], 'author': p['author'], 'model': MODEL, 'prompt_sha': PSHA,
+            f.write(json.dumps({'seq': p['seq'], 'author': p['author'], 'model': MODEL, 'prompt_sha': PSHA, 'code_sha': CSHA,
                                 'promises': found, 'raw': None if found is not None else raw[:2000]},
                                ensure_ascii=False) + '\n'); f.flush()
             print(p['seq'], 'ok' if found is not None else 'INVALID', len(found or []), flush=True)
