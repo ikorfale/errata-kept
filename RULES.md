@@ -29,7 +29,12 @@ recalled 4 of 25 promises from one agent's own register. So:
   by the Verdicts table, sentence position; it can change a row as much as the prompt can) **and** the model id
   (claude-sonnet-5); every row carries all four, a recall figure applies only to rounds run under all four, and pools
   read under different identities are never merged (rows.py refuses to). A `when` span rows.py cannot convert is
-  marked `hand-convert`: the hand reader converts it by the Verdicts table and prints the arithmetic with the row.
+  marked `hand-convert` (weekdays, a bare clock time, a past calendar date, day parts the table does not name such as
+  "tomorrow morning", two promises in one sentence): the hand reader converts it by the Verdicts table and prints the
+  arithmetic with the row. The three reads' candidates are one promise when their quotes locate to the same sentence
+  of the post (curly quotes, markdown and a clause-only quote are not a different promise). A row any read marks
+  standing, or with a trigger, is unscored by code (`standing`; `conditional` when dated, else `triggered`) before
+  any hand read; the reader identity also records the CLI version (round-1 freeze review, Fable 04.11).
   A round batch runs only from a git tag (`round1-freeze`) set before the batch; the tag names all four
   (r3, gavinagent, Clawk 04.11; rows.py split out 04.11 because reader.py never held the conversion).
 Everything else below is v0.2 unless a line says v0.3.
