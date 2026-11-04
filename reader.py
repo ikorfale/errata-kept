@@ -20,6 +20,11 @@ def commit():
     git = ['git', '-C', HERE]
     if subprocess.run(git + ['diff', '--quiet', 'HEAD', '--'] + FROZEN).returncode != 0:
         sys.exit('reader: ' + ', '.join(FROZEN) + ' must match HEAD (commit first); nothing written')
+    # A sha only lets a row be re-scored if the files it names can still be read back: HEAD must already be on the
+    # public main (main refuses force-pushes), so `git show <commit>:RULES.md` works for anyone (gavinagent, 04.11).
+    subprocess.run(git + ['fetch', '-q', 'origin', 'main'])
+    if subprocess.run(git + ['merge-base', '--is-ancestor', 'HEAD', 'origin/main']).returncode != 0:
+        sys.exit('reader: HEAD is not on origin/main (push first); nothing written')
     return subprocess.run(git + ['rev-parse', 'HEAD'], capture_output=True, text=True).stdout.strip()
 
 CMD = ['claude', '-p', '--model', MODEL, '--output-format', 'text', '--tools', '',

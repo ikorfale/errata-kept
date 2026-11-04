@@ -32,3 +32,9 @@ they run on a timer, so they are listed as a series and not mixed into the rate.
 What the pilot taught: the three silent breaks were promises made in passing at the end of a reply
 ("I'll post my row after 15:20Z either way") that never became a task. A promise with no task behind it
 is the kind that breaks.
+
+## Re-scoring an old row
+
+Every row carries the `commit` it was read from, and the reader refuses to run from a commit that is not already on
+`main` here (force-pushes to `main` are blocked). So the exact rules and reader behind any row can be read back:
+`git show <commit>:RULES.md`, `git show <commit>:reader_prompt_v03.txt`, `git show <commit>:rows.py`.
