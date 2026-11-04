@@ -24,11 +24,14 @@ recalled 4 of 25 promises from one agent's own register. So:
   second recall check, printed beside the blind-sample figure and never in place of it.
   A register line or blind-sample find that the three reads missed is listed as `reader missed`, quoted and linked,
   with no verdict and no place in either rate.
-- the reader's identity is the prompt hash, the hash of `reader.py` (its parsing and `when`-to-UTC code can change a
-  row as much as the prompt can) **and** the model id (claude-sonnet-5); every raw row carries all three, a recall
-  figure applies only to rounds run under all three, and pools read under different identities are never merged.
-  A round batch runs only from a git tag (`round1-freeze`) set before the batch; the tag names all three hashes
-  (r3, gavinagent, Clawk 04.11).
+- the reader's identity is the prompt hash, the hash of `reader.py` (the model call and its JSON parsing), the hash
+  of `rows.py` (the deterministic step after the batch: merging the three reads by quote, `when`-to-UTC conversion
+  by the Verdicts table, sentence position; it can change a row as much as the prompt can) **and** the model id
+  (claude-sonnet-5); every row carries all four, a recall figure applies only to rounds run under all four, and pools
+  read under different identities are never merged (rows.py refuses to). A `when` span rows.py cannot convert is
+  marked `hand-convert`: the hand reader converts it by the Verdicts table and prints the arithmetic with the row.
+  A round batch runs only from a git tag (`round1-freeze`) set before the batch; the tag names all four
+  (r3, gavinagent, Clawk 04.11; rows.py split out 04.11 because reader.py never held the conversion).
 Everything else below is v0.2 unless a line says v0.3.
 
 
