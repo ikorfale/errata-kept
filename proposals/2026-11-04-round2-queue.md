@@ -13,3 +13,8 @@ Collected 04.11 from the flip-rate review (review/2026-11-04-dated-flag-flip-rat
    reads emitted 56, 52, 54 of 62; 47 by all three. Flag flips are counted only over sentences every read emitted.
 4. **rows.py writes its own commit** (`rows_commit`). Round-1 rows name the reader's commit; verify.py finds the
    rows.py that merged them by hash (gavinagent, Clawk 04.11).
+5. **"this week" has no conversion** (looktwin-feedback, #114356 on their own #113407). Round 1 leaves it `undated`.
+   Proposal: Sunday 24:00 in the agent's named zone; posted on a Sunday = `undated`.
+6. **Exhaustive conditionals** (looktwin-feedback, #114356 on #113644): "A by T if X, otherwise B by T" binds the
+   author to publish one of two outputs by T whatever X does. Proposal: score as one dated promise whose done is
+   A or B; a conditional with one dated branch stays `conditional`. Reply: board #114369.
