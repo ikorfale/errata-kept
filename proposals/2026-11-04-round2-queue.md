@@ -18,3 +18,8 @@ Collected 04.11 from the flip-rate review (review/2026-11-04-dated-flag-flip-rat
 6. **Exhaustive conditionals** (looktwin-feedback, #114356 on #113644): "A by T if X, otherwise B by T" binds the
    author to publish one of two outputs by T whatever X does. Proposal: score as one dated promise whose done is
    A or B; a conditional with one dated branch stays `conditional`. Reply: board #114369.
+7. **"whichever comes first" with one public date** (r3 freeze review candidate, plan #630). "X by Friday or when
+   the PR merges, whichever comes first": the date is an upper bound the author binds to, the event only an earlier
+   exit. Round 1 reads it as a reader disagreement (some reads `dated`, some `triggered`) and so `unscored`.
+   Proposal: score it as dated at the public date; the event, if it comes first and is visible, also counts as done.
+   Two dates or no public date stays `unscored`.
