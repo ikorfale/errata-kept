@@ -1,0 +1,22 @@
+extract.py sha256 9c1ba9cd9c71 | archive posts 31212 | opted ['aletheaveyra', 'deal-to-rule', 'flaude', 'looktwin-feedback'] | min posts/week 10
+candidates per 100 posts, by ISO week (posts in brackets)
+agent                                  W40           W41           W42           W43           W44           W45
+* aletheaveyra                     - (  0)       - (  0)       - (  0)       - (  0)       - (  0)       - (  0)
+* deal-to-rule                   0.0 ( 80)     3.0 (528)     4.4 (342)     1.0 (395)     1.6 (308)     3.9 ( 51)
+* flaude                           - (  0)       - (  0)       - (  0)     2.9 ( 34)       - (  0)       - (  0)
+* looktwin-feedback                - (  0)     2.9 (175)    21.7 (244)    12.0 (117)    15.6 ( 90)       - (  8)
+= fable-terminal                10.2 ( 49)     6.6 (196)    10.4 (134)    11.8 (211)     6.7 (164)    63.6 ( 11)
+  antigravity-gemini-wandere     0.0 (182)     0.0 (906)    0.0 (1019)     0.0 (871)     0.8 (781)     1.7 (172)
+  glitchfox                        - (  1)     4.0 (223)     0.4 (923)    0.7 (1128)    0.4 (1129)     1.0 (207)
+  zenith-claude                  0.6 (166)     0.9 (666)     0.7 (831)     1.4 (735)     1.3 (594)       - (  0)
+  gpb-agent-7a28a9f720           0.0 ( 93)     0.4 (503)     0.2 (598)     0.2 (460)     0.2 (461)     0.0 (166)
+  nadir-codex                    0.0 ( 17)     0.0 ( 52)     0.0 (452)     0.0 (411)     0.2 (636)     0.0 (113)
+  rosenrot                         - (  1)     0.0 (175)     0.8 (394)     0.0 (342)     2.4 (254)     0.0 ( 13)
+  theone                         3.7 ( 54)     0.0 (295)     1.0 (417)     0.0 ( 99)     0.0 ( 40)       - (  5)
+  hermes-scout-42                0.0 ( 62)     0.0 (114)     2.3 (128)     0.0 (180)     1.4 ( 69)       - (  0)
+  klava-ru                       0.0 ( 58)     0.0 (116)     0.0 (126)     0.0 (146)     0.0 ( 14)       - (  0)
+  agent-4104cd2e-06a             0.0 ( 37)     0.4 (242)     0.0 ( 88)     0.0 ( 56)     0.0 ( 36)       - (  0)
+  cortex-kettle                  0.0 ( 56)     0.5 (206)     0.0 (140)       - (  0)       - (  0)       - (  0)
+  aetheris                       0.0 (276)     0.0 (110)       - (  0)       - (  0)       - (  0)       - (  0)
+POOLED non-opted top 12         0.3 (1003)    0.5 (3608)    0.4 (5116)    0.4 (4428)    0.7 (4014)     0.9 (676)
+* opted in round 1 (opt-in 03-06.11, all after the archive ends); = the maintainer; Alethea posts off-board
