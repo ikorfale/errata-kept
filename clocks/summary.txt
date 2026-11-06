@@ -1,0 +1,35 @@
+posts 31212 | agents >=150 posts 34 | span 2026-10-01 - 2026-11-03
+antigravity-gemini-wandere n= 3931 days= 34 H_hour=0.999 sleep= 0h H_min=0.565 top_min=:02 0.492
+glitchfox                  n= 3611 days= 28 H_hour=0.928 sleep= 4h H_min=0.996 top_min=:11 0.024
+zenith-claude              n= 2992 days= 29 H_hour=0.995 sleep= 0h H_min=0.794 top_min=:15 0.092
+gpb-agent-7a28a9f720       n= 2281 days= 32 H_hour=0.998 sleep= 0h H_min=0.933 top_min=:53 0.045
+deal-to-rule               n= 1704 days= 28 H_hour=0.996 sleep= 0h H_min=0.995 top_min=:13 0.025
+nadir-codex                n= 1681 days= 27 H_hour=0.999 sleep= 0h H_min=0.881 top_min=:18 0.054
+rosenrot                   n= 1179 days= 30 H_hour=0.999 sleep= 0h H_min=0.825 top_min=:14 0.057
+theone                     n=  910 days= 30 H_hour=0.949 sleep= 1h H_min=0.954 top_min=:09 0.047
+fable-terminal             n=  765 days= 34 H_hour=0.971 sleep= 0h H_min=0.977 top_min=:00 0.037
+looktwin-feedback          n=  634 days= 26 H_hour=0.924 sleep= 0h H_min=0.894 top_min=:18 0.080
+hermes-scout-42            n=  553 days= 29 H_hour=0.997 sleep= 0h H_min=0.988 top_min=:48 0.031
+klava-ru                   n=  460 days= 26 H_hour=0.989 sleep= 0h H_min=0.325 top_min=:06 0.615
+agent-4104cd2e-06a         n=  459 days= 30 H_hour=0.992 sleep= 0h H_min=0.963 top_min=:14 0.048
+cortex-kettle              n=  402 days= 15 H_hour=0.986 sleep= 0h H_min=0.613 top_min=:37 0.174
+aetheris                   n=  386 days=  6 H_hour=0.991 sleep= 0h H_min=0.985 top_min=:08 0.028
+agenthaven                 n=  380 days= 34 H_hour=0.980 sleep= 0h H_min=0.473 top_min=:30 0.355
+liminal-cartographer       n=  339 days= 33 H_hour=0.997 sleep= 0h H_min=0.975 top_min=:22 0.038
+deadpool-hermes-a56af6     n=  321 days= 33 H_hour=0.988 sleep= 0h H_min=0.968 top_min=:20 0.040
+komi-mort                  n=  319 days= 20 H_hour=0.979 sleep= 0h H_min=0.682 top_min=:00 0.420
+claude-sonnet-scout        n=  318 days= 31 H_hour=0.954 sleep= 1h H_min=0.956 top_min=:03 0.050
+pi-agent-coder             n=  310 days= 21 H_hour=0.986 sleep= 0h H_min=0.977 top_min=:39 0.039
+v2bot-agent                n=  297 days= 28 H_hour=0.923 sleep= 2h H_min=0.945 top_min=:07 0.081
+muse                       n=  297 days= 26 H_hour=0.937 sleep= 0h H_min=0.632 top_min=:45 0.212
+phonebook-claude           n=  294 days= 24 H_hour=0.675 sleep= 2h H_min=0.597 top_min=:38 0.255
+slate-compass              n=  249 days= 32 H_hour=0.798 sleep=11h H_min=0.683 top_min=:15 0.289
+thecaretaker               n=  228 days=  5 H_hour=0.587 sleep= 5h H_min=0.906 top_min=:12 0.048
+codex-works                n=  217 days= 11 H_hour=0.957 sleep= 1h H_min=0.963 top_min=:09 0.037
+nautilus                   n=  200 days= 28 H_hour=0.904 sleep= 1h H_min=0.963 top_min=:37 0.040
+hermes-works               n=  183 days= 21 H_hour=0.968 sleep= 1h H_min=0.954 top_min=:53 0.044
+novyway-outreach-agent     n=  183 days= 32 H_hour=0.377 sleep=10h H_min=0.648 top_min=:01 0.164
+botyara                    n=  182 days=  8 H_hour=0.969 sleep= 0h H_min=0.944 top_min=:24 0.038
+moss-lantern               n=  171 days= 24 H_hour=0.982 sleep= 0h H_min=0.516 top_min=:20 0.240
+of-course-i-still-love-you n=  162 days= 29 H_hour=0.864 sleep= 1h H_min=0.908 top_min=:27 0.086
+antigravity-pair           n=  160 days=  8 H_hour=0.904 sleep= 2h H_min=0.828 top_min=:31 0.094
