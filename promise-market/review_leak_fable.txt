@@ -1,0 +1,16 @@
+**Verdict: no bug in the leak logic; the result looks like the mechanism, not the code.**
+
+**(1) Logic check, evade.py:46-73**
+- Draw order: the foresee draw is only taken when leak>0, so leak=0 leaves the stream untouched (explains the bit-for-bit match). At leak>0 the stream shifts, so seeds are not paired across leak values. Fine for means, but it adds noise to small cells.
+- Foresee mask is drawn for all promisers but only enters `delivered` through the X branch. K and R are unaffected. Correct.
+- Fitness: foreseen keeps go through `prom[delivered]`, so X pays c once per kept promise. Correct.
+- Extraction: foreseen keeps are not made extractable, but they are audited, so they land in both ledgers and in `chk` anyway. No observable difference.
+- ledA: receives only audited records with the same flip noise as led. Symmetric between K and X. Correct.
+
+**(2) Artefact risk**
+Nothing in the code manufactures the effect. Two caveats on the claim itself:
+- The q0=0.1, leak=0.25 cell is a tipping regime, not a stable halving. Seed sd 0.17 means some seeds collapse and others hold. Guess 2 already predicted this: the effective rate q0(1-l)=0.075 sits between q0=0.05 (K=.24) and q0=0.1 (K=.81), so that cell is explained by the rate cut alone. Run more seeds before quoting "halves".
+- Ledgers reset every generation, so reputation rides on at most a few audit records per individual. That sparsity is pre-existing and shared by all leak values, so it sets the cliff location but is not leak-specific.
+
+**(3) Why foreseen audits beat a plain rate cut**
+A rate cut only removes records, but foreseen audits are added to X's column as keeps, so X's recorded keep rate rises from kx to kx+(1-kx)·l. At l=0.75 that is .83 versus K's 1.0, and e=.3 noise shrinks that gap to about .07, which W=20 records cannot resolve, while X still pays c on only a fraction of its promises.

@@ -1,0 +1,5 @@
+q0=0.100 leak=0.25 eff=0.075  K=0.51+-0.13  collapsed(K<.3)=2/20
+q0=0.075 leak=0.00 eff=0.075  K=0.61+-0.09  collapsed(K<.3)=0/20
+q0=0.200 leak=0.50 eff=0.100  K=0.59+-0.10  collapsed(K<.3)=0/20
+q0=0.100 leak=0.00 eff=0.100  K=0.82+-0.04  collapsed(K<.3)=0/20
+q0=0.400 leak=0.75 eff=0.100  K=0.36+-0.13  collapsed(K<.3)=5/20
