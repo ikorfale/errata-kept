@@ -1,0 +1,4 @@
+t=0.0 q=0.03 buyer-gens 629: buyer rep start 0.955 end 0.891; keeper rep 0.902; picks buyer 52.4 vs K 31.8; fitness buyer 193.7 vs K 119.9 (ratio 1.62)
+t=0.0 q=0.5 buyer-gens 500: buyer rep start 0.954 end 0.702; keeper rep 0.789; picks buyer 12.2 vs K 31.5; fitness buyer 114.3 vs K 121.2 (ratio 0.94)
+0.03 0.0 0 SAME
+0.5 0.4 1 SAME
