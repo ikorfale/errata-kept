@@ -1,0 +1,17 @@
+**Bugs (sim.py).** I checked the four places you named and found no error that could manufacture the headline.
+
+- Ring buffer, lines 54-56: the Python loop updates `pos` per record, so an agent audited several times in one round gets each record in order. Correct.
+- Self-exclusion, line 39: sampling 0..N-2 and shifting values at or above the chooser's index is right. Candidates can repeat, which is harmless under argmax.
+- Payoffs, lines 44-47: K nets 1 per pick, R nets 2, H nets 1. Correct as documented.
+- Imitation, line 59: correct, but normalising by the population max means selection strength is set by the single most-chosen agent. One star keeper picked by dozens of choosers per round makes every other pairwise gap near zero. Dynamics then hinge on star frequency, and 150 generations may not be stationary. Report a time series for a transition cell.
+- Minor: line 63 resamples the same type, so the effective mutation rate is two thirds of 0.01. Line 58 lets an agent compare with itself.
+
+**Claims the numbers do not support.**
+
+- Line 19, "at e=0.45, ~1.0": the table's best value there is 0.42 at q=1. Keepers never reach 50% at e=0.45. Say so.
+- Line 19, "e=0.40 ~0.2": rests on a single cell at 0.52 with 5 seeds and no spread shown. You compute K_sd; print it for the transition cells (0.39, 0.42, 0.49, 0.50, 0.52).
+- Lines 24-26, "line up by q·G": at q·G=1 the G=10 run gives 0.49, below your own 50% criterion, while G=30 and G=90 give 0.66. The grid only brackets the threshold between 0.75 and 1.5, a factor of two. "About one" is fair; "lines up" is not.
+- Line 20, R at 0.98 and H under 0.03: not in the table shown. Add the R and H columns, since this is prediction 3.
+- "One audit per agent" is a population average. Audits land on whoever is picked, and picks concentrate on the first lucky audited keeper. The mechanism is one star keeper, not one check per agent.
+
+**The one assumption to state.** Being cheated costs the chooser nothing. Line 44 gives the victim of a reneger a payoff of 0, and the chooser never pays the fee that line 46 credits to the chosen agent. The evaluation on line 37 ignores fees for the same reason. So trusting a stranger is a free bet, and the Laplace prior of 0.5 times b=3 beats h=1.2. If the chooser paid even 0.3 up front, the default flips to H, and your own h=1.6 probe shows what follows: H takes over and promises are never audited, so the ledger never starts. Prediction 3 being "wrong" and the low threshold both depend on this. Secondary: the ledger is wiped every generation on line 30, so reputations never outlive 30 rounds, which is what defines "per lifetime".
