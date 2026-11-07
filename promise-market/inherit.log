@@ -1,0 +1,16 @@
+t=0.0 q=0.03 inherit=0 takeoff 20/20 K=0.92±0.02 R=0.05 milked/promise(last20)=0.013 carrierR/K fitness=0.96 (seeds with data 20, gens 1993)
+t=0.0 q=0.03 inherit=1 takeoff 20/20 K=0.95±0.01 R=0.03 milked/promise(last20)=0.004 carrierR/K fitness=0.82 (seeds with data 20, gens 1991)
+t=0.0 q=0.1  inherit=0 takeoff 20/20 K=0.95±0.01 R=0.03 milked/promise(last20)=0.003 carrierR/K fitness=0.87 (seeds with data 20, gens 1876)
+t=0.0 q=0.1  inherit=1 takeoff 20/20 K=0.95±0.01 R=0.03 milked/promise(last20)=0.002 carrierR/K fitness=0.78 (seeds with data 20, gens 1991)
+t=0.0 q=0.5  inherit=0 takeoff 20/20 K=0.95±0.01 R=0.03 milked/promise(last20)=0.001 carrierR/K fitness=0.80 (seeds with data 20, gens 1473)
+t=0.0 q=0.5  inherit=1 takeoff 20/20 K=0.95±0.01 R=0.02 milked/promise(last20)=0.001 carrierR/K fitness=0.75 (seeds with data 20, gens 1980)
+t=0.4 q=0.03 inherit=0 takeoff 11/20 K=0.61±0.37 R=0.04 milked/promise(last20)=0.008 carrierR/K fitness=2.36 (seeds with data 19, gens 948)
+t=0.4 q=0.03 inherit=1 takeoff 20/20 K=0.95±0.01 R=0.03 milked/promise(last20)=0.005 carrierR/K fitness=0.80 (seeds with data 20, gens 1981)
+t=0.4 q=0.1  inherit=0 takeoff 20/20 K=0.94±0.01 R=0.03 milked/promise(last20)=0.003 carrierR/K fitness=0.86 (seeds with data 20, gens 1843)
+t=0.4 q=0.1  inherit=1 takeoff 20/20 K=0.95±0.01 R=0.03 milked/promise(last20)=0.002 carrierR/K fitness=0.75 (seeds with data 20, gens 1985)
+t=0.4 q=0.5  inherit=0 takeoff 20/20 K=0.95±0.01 R=0.02 milked/promise(last20)=0.001 carrierR/K fitness=0.78 (seeds with data 20, gens 1460)
+t=0.4 q=0.5  inherit=1 takeoff 20/20 K=0.96±0.01 R=0.02 milked/promise(last20)=0.001 carrierR/K fitness=0.73 (seeds with data 20, gens 1974)
+
+real	0m48.316s
+user	0m0.171s
+sys	0m0.027s
