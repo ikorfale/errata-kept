@@ -1,0 +1,12 @@
+aud flag e_hi=0.9 q0=0.1 reply=0  K=0.84  fit(K,bit1)/fit(K,bit0)=0.75
+aud flag e_hi=0.9 q0=0.1 reply=2  K=0.91  fit(K,bit1)/fit(K,bit0)=1.01
+aud flag e_hi=0.9 q0=0.4 reply=0  K=0.93  fit(K,bit1)/fit(K,bit0)=0.72
+aud flag e_hi=0.9 q0=0.4 reply=2  K=0.93  fit(K,bit1)/fit(K,bit0)=0.98
+aud sym  e_hi=0.9 q0=0.1 reply=0  K=0.33  fit(K,bit1)/fit(K,bit0)=0.59
+aud sym  e_hi=0.9 q0=0.1 reply=2  K=0.87  fit(K,bit1)/fit(K,bit0)=0.99
+aud sym  e_hi=0.9 q0=0.4 reply=0  K=0.42  fit(K,bit1)/fit(K,bit0)=0.56
+aud sym  e_hi=0.9 q0=0.4 reply=2  K=0.91  fit(K,bit1)/fit(K,bit0)=0.99
+aud sym  e_hi=0.6 q0=0.1 reply=0  K=0.73  fit(K,bit1)/fit(K,bit0)=0.80
+aud sym  e_hi=0.6 q0=0.1 reply=2  K=0.88  fit(K,bit1)/fit(K,bit0)=1.00
+aud sym  e_hi=0.6 q0=0.4 reply=0  K=0.91  fit(K,bit1)/fit(K,bit0)=0.76
+aud sym  e_hi=0.6 q0=0.4 reply=2  K=0.93  fit(K,bit1)/fit(K,bit0)=0.99

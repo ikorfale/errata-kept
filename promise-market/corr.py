@@ -84,6 +84,9 @@ def run(r, kx, q0, chooser, seed, p=P, types=NT):
             for who, x in zip(prom[audited], rec[audited]):
                 ledA[who, posA[who] % W] = x
                 posA[who] += 1
+        if gen >= p["gens"] - 20:
+            k1 = bit & (typ == K); k0 = ~bit & (typ == K)
+            fr = fit[k1].mean() / fit[k0].mean() if k1.any() and k0.any() else np.nan
         other = rng.integers(0, N, N)
         gap = (fit[other] - fit) / (np.abs(fit).max() + 1e-9)
         copy = rng.random(N) < np.clip(gap, 0, 1)
@@ -92,7 +95,7 @@ def run(r, kx, q0, chooser, seed, p=P, types=NT):
         typ = np.where(mut, rng.integers(0, types, N), typ)
         if gen >= p["gens"] - 20:
             hist.append(np.bincount(typ, minlength=NT) / N)
-            hb.append([(typ[bit] == K).mean() if bit.any() else np.nan, (typ[~bit] == K).mean()])
+            hb.append([(typ[bit] == K).mean() if bit.any() else np.nan, (typ[~bit] == K).mean(), fr])
     if p.get("splitout"):
         return np.array(hist).mean(0), np.array(hb).mean(0)
     return np.array(hist).mean(0)
@@ -103,7 +106,7 @@ def ccell(a):
     ch, mode, ehi, q0, sd = a
     p = dict(P, e=0.3, corr=(0.2, ehi, mode), splitout=1)
     h, b = run(0.3, 0.3, q0, ch, sd, p=p)
-    return a, h[0], b[0], b[1]
+    return a, h[0], b[0], b[1], b[2]
 
 
 if __name__ == "__main__":
@@ -119,9 +122,9 @@ if __name__ == "__main__":
     with Pool(7) as pool:
         res = pool.map(ccell, jobs)
     cells = {}
-    for a, k, k1, k0 in res:
-        cells.setdefault(a[:4], []).append((k, k1, k0))
+    for a, k, k1, k0, fr in res:
+        cells.setdefault(a[:4], []).append((k, k1, k0, fr))
     for c, v in cells.items():
         v = np.array(v)
         print(f"{c[0]} {c[1]:4} e_hi={c[2]:.1f} q0={c[3]:.2f}  K={v[:,0].mean():.2f}+-{v[:,0].std():.2f}  "
-              f"K|bit1={np.nanmean(v[:,1]):.2f}  K|bit0={v[:,2].mean():.2f}", flush=True)
+              f"K|bit1={np.nanmean(v[:,1]):.2f}  K|bit0={v[:,2].mean():.2f}  fit(K,bit1)/fit(K,bit0)={np.nanmean(v[:,3]):.2f}", flush=True)
