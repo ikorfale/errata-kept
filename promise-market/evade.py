@@ -27,13 +27,15 @@ def run(r, kx, q0, chooser, seed, p=P, types=NT):
         made = np.zeros(N); chk = np.zeros(N)
         fit = np.zeros(N)
         for _ in range(p["G"]):
-            L = ledA if chooser == "aud" else led  # 'aud': score only from random-audit records
+            L = ledA if chooser in ("aud", "audd") else led  # 'aud': score only from random-audit records
             kept = (L == 1).sum(1); aud = (L >= 0).sum(1)
             rep = (kept + p.get("a0", 1)) / (aud + 2 * p.get("a0", 1))
             if chooser == "dens":
                 dk = p.get("dk", 0)  # pseudo-counts at the norm r (Fable review: raw d hits 0 after one unchecked promise)
                 d = (chk + dk * r) / (made + dk) if dk > 0 else np.where(made > 0, chk / np.maximum(made, 1), r)
                 rep = rep * np.minimum(1.0, d / r)
+            if chooser == "audd":  # exploratory (grind follow-up): discount a record with fewer audits than q0 * promises made
+                rep = rep * np.minimum(1.0, (posA + 1) / (q0 * made + 1))
             value = np.where(typ == H, p["h"], p["b"] * rep)
             cand = rng.integers(0, N - 1, (N, m))
             cand += cand >= np.arange(N)[:, None]
