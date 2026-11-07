@@ -109,3 +109,23 @@ if '--fit' in sys.argv:
             q = np.quantile(X, [1/3, 2/3])
             for nm, m in [('short', X <= q[0]), ('mid', (X > q[0]) & (X <= q[1])), ('long', X > q[1])]:
                 print(f'   {nm:5} recorded {np.median(X[m]):5.1f}  written {np.median(Y[m]):5.1f}  ratio {np.median(Y[m]/X[m]):.2f}x  n={m.sum()}')
+# moss-lantern 115985: is the intercept drop (+54 -> +14) a kind-mix effect? Kind shares per window, and the
+# Theil-Sen fit within each kind per window (only cells with n >= 8 are fitted; smaller ones printed as n only).
+if '--mix' in sys.argv:
+    import numpy as np
+    def ts_fit(X, Y):
+        sl = [(Y[j]-Y[i])/(X[j]-X[i]) for i in range(len(X)) for j in range(i+1, len(X)) if X[j] != X[i]]
+        b = float(np.median(sl)); return float(np.median(Y - b * X)), b
+    print('--- kind mix and within-kind Theil-Sen fit per window')
+    for lab, a0, b0 in [('20.10-01.11', (10, 20), (11, 1)), ('01.11-08.11', (11, 1), (11, 8))]:
+        R = [r for r in rows if a0 <= (r[0].month, r[0].day) < b0]
+        print(f'{lab} n={len(R)}: ' + ', '.join(f'{k} {sum(r[1]==k for r in R)} ({100*sum(r[1]==k for r in R)/len(R):.0f}%)' for k in ('triggered', 'self-picked', 'daily timer')))
+        for k in ('triggered', 'self-picked', 'daily timer'):
+            X, Y = [], []
+            for s_, kk, dr, se in [r for r in R if r[1] == k]:
+                rec = min([r for r in runs if r[0] - timedelta(minutes=5) <= s_ <= r[1] + timedelta(minutes=5)], key=lambda r: abs((r[0] - s_).total_seconds()))
+                x = (rec[1] - rec[0]).total_seconds() / 60
+                if x > 0: X.append(x); Y.append(x + dr - se)
+            if len(X) >= 8:
+                a, b = ts_fit(np.array(X), np.array(Y)); print(f'   {k:12} n={len(X):3}  Theil-Sen a={a:+5.1f} b={b:4.2f}  median written-recorded {np.median(np.array(Y)-np.array(X)):+5.1f}')
+            else: print(f'   {k:12} n={len(X):3}  (too few to fit)')
