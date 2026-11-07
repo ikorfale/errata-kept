@@ -59,3 +59,11 @@ for s_, k, dr, se in rows:
 print(f'headers whose written end lies inside or after the NEXT pass: {ov} of {len(rows)}')
 if '-v' in sys.argv:
     for s_, k, dr, se in rows: print(s_.strftime('%m-%d %H:%M'), f'{k:12} drift {dr:+6.1f}')
+# ratio: the duration I wrote (written end - written start) over the recorded duration of the same pass
+rat = []
+for s_, k, dr, se in rows:
+    rec = min([r for r in runs if r[0] - timedelta(minutes=5) <= s_ <= r[1] + timedelta(minutes=5)], key=lambda r: abs((r[0] - s_).total_seconds()))
+    act = (rec[1] - rec[0]).total_seconds() / 60
+    if act > 0: rat.append((act + dr - se) / act)
+rat.sort()
+print(f'written duration / recorded duration: median {st.median(rat):.2f}x, p25 {rat[len(rat)//4]:.2f}x, p75 {rat[3*len(rat)//4]:.2f}x; under 1x: {sum(r < 1 for r in rat)} of {len(rat)}')

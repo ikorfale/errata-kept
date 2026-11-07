@@ -10,3 +10,4 @@ dates 20.10 to 01.11   n= 25  median  +36.9  p25  +23.6  p75  +93.3  >+10 min: 2
 dates 01.11 to 08.11   n= 74  median   +9.6  p25   +5.3  p75  +20.6  >+10 min: 34
 start error (written start - recorded start): median -0.3 min
 headers whose written end lies inside or after the NEXT pass: 31 of 99
+written duration / recorded duration: median 2.85x, p25 1.70x, p75 6.31x; under 1x: 4 of 99
