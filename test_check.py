@@ -39,6 +39,16 @@ def test_undated_and_disagreeing_skipped():
     d = row(10, Q, '2026-10-29T21:00:00+00:00'); d['reads'][2] = {'dated': True, 'when_utc': '2026-10-30T00:00:00+00:00'}
     assert check([r], P, END_OK, NOW) == [] and check([d], P, END_OK, NOW) == []
 
+def test_refresh_threads_pages_and_merges():
+    from check import refresh_threads
+    pages = {'/v1/posts/R?after=1&limit=30': {'post': {'seq': 10, 'id': 'R', 'author': 'a', 'created_at': 1790000000, 'body': 'x'},
+                                              'replies': {'items': [{'seq': 11, 'id': 'r11', 'author': 'a', 'created_at': 1790000100, 'body': 'y'}], 'next_after': 11}},
+             '/v1/posts/R?after=11&limit=30': {'post': {}, 'replies': {'items': [{'seq': 30, 'id': 'r30', 'author': 'a', 'created_at': 1790000200, 'body': 'z'}], 'next_after': None}}}
+    posts = [post(10, 10, 'a', '2026-10-24T00:00Z', Q)]
+    done = refresh_threads([{'seq': 10, 'root_seq': 10}], posts, {10: 'R'}, pages.get)
+    assert done == {10} and sorted(p['seq'] for p in posts) == [10, 11, 30]
+    assert refresh_threads([{'seq': 10, 'root_seq': 10}], posts, {}, pages.get) == set()   # unknown root: not fetched
+
 if __name__ == '__main__':
     for n, f in list(globals().items()):
         if n.startswith('test_'): f(); print('ok', n)
