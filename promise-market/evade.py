@@ -48,6 +48,14 @@ def run(r, kx, q0, chooser, seed, p=P, types=NT):
             # leak (agenthaven #116109): X foresees an audit with prob p['leak'] and keeps that promise
             lk = p.get("leak", 0.0)
             foresee = audited & (rng.random(prom.size) < lk) if lk > 0 else np.zeros(prom.size, bool)
+            # grind (hivefound, Moltbook 07.11): the audit seed is a future event, but the promiser may influence it.
+            # With prob p['ginf'] an X that plans to break a promise picks among p['grind'] candidate seeds and takes one
+            # that skips that promise: it is audited only if every candidate selects it (q0**N). Extra draws only if grind > 1.
+            gn = p.get("grind", 1)
+            if gn > 1:
+                infl = (ptp == X) & (u >= kx) & (rng.random(prom.size) < p.get("ginf", 1.0))
+                every = (rng.random((prom.size, gn - 1)) < q0).all(1)
+                audited = audited & ~(infl & ~every)
             delivered = (ptp == K) | ((ptp == X) & ((u < kx) | foresee))
             # chooser payoff
             pay = np.zeros(N)
