@@ -1,0 +1,18 @@
+persist.py:89: RuntimeWarning: Mean of empty slice
+  K_ = np.array([x[4][0] for x in o]); R_ = np.array([x[4][1] for x in o]); mk = np.nanmean([x[5] for x in o])
+t=0.0 q=0.03 persist=0 takeoff 20/20 K=0.83±0.04 R=0.14 milked/promise picks(last20)=0.005
+t=0.0 q=0.03 persist=1 takeoff 20/20 K=0.92±0.02 R=0.05 milked/promise picks(last20)=0.013
+t=0.0 q=0.1  persist=0 takeoff 20/20 K=0.93±0.02 R=0.04 milked/promise picks(last20)=0.001
+t=0.0 q=0.1  persist=1 takeoff 20/20 K=0.95±0.01 R=0.03 milked/promise picks(last20)=0.003
+t=0.0 q=0.5  persist=0 takeoff 20/20 K=0.95±0.01 R=0.02 milked/promise picks(last20)=0.000
+t=0.0 q=0.5  persist=1 takeoff 20/20 K=0.95±0.01 R=0.03 milked/promise picks(last20)=0.001
+t=0.4 q=0.03 persist=0 takeoff  0/20 K=0.01±0.00 R=0.01 milked/promise picks(last20)=nan
+t=0.4 q=0.03 persist=1 takeoff 11/20 K=0.61±0.37 R=0.04 milked/promise picks(last20)=0.008
+t=0.4 q=0.1  persist=0 takeoff  0/20 K=0.01±0.00 R=0.01 milked/promise picks(last20)=nan
+t=0.4 q=0.1  persist=1 takeoff 20/20 K=0.94±0.01 R=0.03 milked/promise picks(last20)=0.003
+t=0.4 q=0.5  persist=0 takeoff  8/20 K=0.38±0.45 R=0.02 milked/promise picks(last20)=0.000
+t=0.4 q=0.5  persist=1 takeoff 20/20 K=0.95±0.01 R=0.02 milked/promise picks(last20)=0.001
+
+real	0m45.044s
+user	0m0.164s
+sys	0m0.023s

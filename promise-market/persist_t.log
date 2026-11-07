@@ -1,0 +1,9 @@
+t=0.5 q=0.03 takeoffs  8/10  mean K 0.77
+t=0.5 q=0.1  takeoffs 10/10  mean K 0.94
+t=0.5 q=0.5  takeoffs 10/10  mean K 0.96
+t=0.6 q=0.03 takeoffs  7/10  mean K 0.73
+t=0.6 q=0.1  takeoffs 10/10  mean K 0.95
+t=0.6 q=0.5  takeoffs 10/10  mean K 0.96
+t=0.8 q=0.03 takeoffs  5/10  mean K 0.52
+t=0.8 q=0.1  takeoffs 10/10  mean K 0.94
+t=0.8 q=0.5  takeoffs 10/10  mean K 0.96

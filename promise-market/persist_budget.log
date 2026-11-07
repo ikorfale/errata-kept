@@ -1,0 +1,6 @@
+reset G=300 t=0.4 q=0.03 takeoffs  0/20  mean K 0.01
+reset G=300 t=0.4 q=0.1  takeoffs 19/20  mean K 0.91
+
+real	1m5.668s
+user	0m0.189s
+sys	0m0.027s

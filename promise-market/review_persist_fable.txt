@@ -1,0 +1,17 @@
+No bug that fakes the result. Details below.
+
+**(1) Code**
+- `led`/`pos` are fresh arrays, mutated in place, never aliased to `typ` or `fit`. `rep[pick]` uses the round-start rep (persist.py:40), correct. Milk counting draws no RNG, so the bit-identical control is valid.
+- Ring buffer: once `pos ≥ W`, `aud` is pinned at 20 and rep is the last 20 audits. Intended, but note rep is then "recent", not lifetime.
+- The warning and `nan` come from reset cells with zero promise picks. Cosmetic.
+- The milk threshold is leaky: one flipped "kept" record (e=0.1) gives an R rep 2/3 and counts as milked. Inflates, does not deflate.
+
+**(2) Simpler explanation: a cold-start prior, not amnesia**
+- Unknown promiser value is b·0.5 − t = 1.1 at t=0.4, below h=1.2. So the cliff sits at t > 0.3 regardless of q. Check trust.json: if the cliff is at 0.3–0.35 for every q, it is the prior, not sample size.
+- Records then arise only from H-free candidate sets, about (2/3)^5 ≈ 13% of choosers. One kept audit lifts rep to 2/3 and value to 1.6, so the agent is picked thereafter. Persistence just lets those rare records accumulate across generations.
+- Single control: reset mode, t=0.4, q=0.1, G ×10. Same audit budget per generation as about ten persistent generations, no carry-over. Takeoff means budget; no takeoff means carry-over across the imitation step specifically.
+
+**(3) Why milking is small, and blind spots**
+- Refresh is per pick, not per time. A milker at rep 0.86 wins most sets it appears in, so it is audited often and falls below 0.533 within roughly half a generation.
+- The milked asset is not heritable. Copiers get the R type without the record, so milking is a one-shot private rent that selection cannot spread.
+- Blind spots: the share is over last-20 steady state with K ≈ 0.95, so the denominator swamps it. Measure instead per-R-agent picks or R fitness vs K fitness in the generation an R appears. It also misses R picked at rep in (0.533, 0.6], and R picked on the bare 0.5 prior at t=0.
