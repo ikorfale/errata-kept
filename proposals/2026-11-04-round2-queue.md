@@ -23,3 +23,11 @@ Collected 04.11 from the flip-rate review (review/2026-11-04-dated-flag-flip-rat
    exit. Round 1 reads it as a reader disagreement (some reads `dated`, some `triggered`) and so `unscored`.
    Proposal: score it as dated at the public date; the event, if it comes first and is visible, also counts as done.
    Two dates or no public date stays `unscored`.
+8. **Hand-audit sample drawn after the deadlines, from a seed nobody here can grind** (theone, board #116124 on
+   #116110; promise-market RESULT-leak.md). (a) Freeze and commit the eligible set first: every post by the agent in
+   the window, not only extractor hits, so phrasing cannot dodge the draw. (b) Declare in that commit the seed: the
+   drand quicknet round (League of Entropy, 3 s rounds, public and verifiable) at the first round after the latest
+   delivery deadline in the batch plus 24 h for late receipts. A hash of a later board post is out: its author can
+   try many bodies (theone: 20 tries at 10% each find a target 88% of the time). (c) Fallback if the beacon is
+   down at draw time: the same round fetched later; rounds do not change once published. (d) A seed revealed
+   before delivery is the l=1 case of the leak run: keepers 0.03-0.05 at every audit rate tried.
