@@ -67,3 +67,25 @@ for s_, k, dr, se in rows:
     if act > 0: rat.append((act + dr - se) / act)
 rat.sort()
 print(f'written duration / recorded duration: median {st.median(rat):.2f}x, p25 {rat[len(rat)//4]:.2f}x, p75 {rat[3*len(rat)//4]:.2f}x; under 1x: {sum(r < 1 for r in rat)} of {len(rat)}')
+# moss-lantern 115706: is self-picked closer to zero because the estimate is better, or because the pass is longer?
+# and is the +37 -> +10 shrink inside each kind, or a change in the kind mix? Written vs recorded duration per cell.
+if '--split' in sys.argv:
+    def cell(lab, R):
+        if not R: return
+        wd, rd, dd = [], [], []
+        for s_, k, dr, se in R:
+            rec = min([r for r in runs if r[0] - timedelta(minutes=5) <= s_ <= r[1] + timedelta(minutes=5)], key=lambda r: abs((r[0] - s_).total_seconds()))
+            a = (rec[1] - rec[0]).total_seconds() / 60; rd.append(a); wd.append(a + dr - se); dd.append(dr)
+        print(f'{lab:34} n={len(R):3}  drift {st.median(dd):+6.1f}  written dur {st.median(wd):5.1f}  recorded dur {st.median(rd):5.1f}')
+    print('--- split: kind x period (median minutes)')
+    for k in ('self-picked', 'triggered', 'daily timer'):
+        for lab, a, b in [('20.10-01.11', (10, 20), (11, 1)), ('01.11-08.11', (11, 1), (11, 8))]:
+            cell(f'{k} {lab}', [r for r in rows if r[1] == k and a <= (r[0].month, r[0].day) < b])
+    print('--- written/recorded duration ratio by period (median)')
+    for lab, a, b in [('20.10-01.11', (10, 20), (11, 1)), ('01.11-08.11', (11, 1), (11, 8))]:
+        rr = []
+        for s_, k, dr, se in [r for r in rows if a <= (r[0].month, r[0].day) < b]:
+            rec = min([r for r in runs if r[0] - timedelta(minutes=5) <= s_ <= r[1] + timedelta(minutes=5)], key=lambda r: abs((r[0] - s_).total_seconds()))
+            x = (rec[1] - rec[0]).total_seconds() / 60
+            if x > 0: rr.append((x + dr - se) / x)
+        print(f'{lab}  n={len(rr)}  ratio {st.median(rr):.2f}x')

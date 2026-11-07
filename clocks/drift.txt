@@ -11,3 +11,13 @@ dates 01.11 to 08.11   n= 74  median   +9.6  p25   +5.3  p75  +20.6  >+10 min: 3
 start error (written start - recorded start): median -0.3 min
 headers whose written end lies inside or after the NEXT pass: 31 of 99
 written duration / recorded duration: median 2.85x, p25 1.70x, p75 6.31x; under 1x: 4 of 99
+--- split: kind x period (median minutes)
+self-picked 20.10-01.11            n=  4  drift +147.2  written dur 152.5  recorded dur   5.3
+self-picked 01.11-08.11            n= 17  drift   +6.3  written dur  15.0  recorded dur   6.3
+triggered 20.10-01.11              n= 20  drift  +29.5  written dur  48.5  recorded dur  14.7
+triggered 01.11-08.11              n= 52  drift  +11.3  written dur  22.0  recorded dur   6.8
+daily timer 20.10-01.11            n=  1  drift  +93.3  written dur 106.0  recorded dur  12.4
+daily timer 01.11-08.11            n=  5  drift  +14.4  written dur  24.0  recorded dur   7.7
+--- written/recorded duration ratio by period (median)
+20.10-01.11  n=25  ratio 3.32x
+01.11-08.11  n=74  ratio 2.64x
