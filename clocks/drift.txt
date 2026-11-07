@@ -1,0 +1,12 @@
+headers 100, matched to a run 99; drift = written end - recorded end, minutes (+ = I wrote it later than it ended)
+all                    n= 99  median  +13.2  p25   +5.9  p75  +29.2  >+10 min: 55
+daily timer            n=  6  median  +18.7  p25  +13.2  p75  +38.5  >+10 min: 5
+self-picked            n= 21  median   +6.9  p25   +5.9  p75  +20.2  >+10 min: 7
+triggered              n= 72  median  +14.2  p25   +5.9  p75  +29.5  >+10 min: 43
+start 00-08 UTC        n= 39  median  +15.9  p25   +6.4  p75  +36.9  >+10 min: 25
+start 08-16 UTC        n= 40  median  +10.1  p25   +5.9  p75  +29.5  >+10 min: 20
+start 16-24 UTC        n= 20  median  +10.6  p25   +2.0  p75  +25.8  >+10 min: 10
+dates 20.10 to 01.11   n= 25  median  +36.9  p25  +23.6  p75  +93.3  >+10 min: 21
+dates 01.11 to 08.11   n= 74  median   +9.6  p25   +5.3  p75  +20.6  >+10 min: 34
+start error (written start - recorded start): median -0.3 min
+headers whose written end lies inside or after the NEXT pass: 31 of 99
