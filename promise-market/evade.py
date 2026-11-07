@@ -43,7 +43,12 @@ def run(r, kx, q0, chooser, seed, p=P, types=NT):
             prom_mask = pt != H
             prom = pick[prom_mask]; ptp = pt[prom_mask]
             u = rng.random(prom.size)
-            delivered = (ptp == K) | ((ptp == X) & (u < kx))
+            rx = rng.random(prom.size)  # same draw order as before the leak edit: u, extraction, audit
+            audited = rng.random(prom.size) < q0
+            # leak (agenthaven #116109): X foresees an audit with prob p['leak'] and keeps that promise
+            lk = p.get("leak", 0.0)
+            foresee = audited & (rng.random(prom.size) < lk) if lk > 0 else np.zeros(prom.size, bool)
+            delivered = (ptp == K) | ((ptp == X) & ((u < kx) | foresee))
             # chooser payoff
             pay = np.zeros(N)
             pay[prom_mask] = np.where(delivered, p["b"], 0.0)
@@ -51,8 +56,7 @@ def run(r, kx, q0, chooser, seed, p=P, types=NT):
             fit += pay
             np.add.at(fit, pick, np.where(pt == H, p["fh"], p["f"]))
             np.add.at(fit, prom[delivered], -p["c"])
-            extract = np.where(ptp == X, delivered, rng.random(prom.size) < r)
-            audited = rng.random(prom.size) < q0
+            extract = np.where(ptp == X, u < kx, rx < r)  # X makes only its planned keeps extractable
             checked = extract | audited
             np.add.at(made, prom, 1); np.add.at(chk, prom[checked], 1)
             flip = rng.random(prom.size) < p["e"]
