@@ -54,6 +54,10 @@ def run(r, kx, q0, chooser, seed, p=P, types=NT):
             np.add.at(made, prom, 1); np.add.at(chk, prom[checked], 1)
             flip = rng.random(prom.size) < p["e"]
             rec = (delivered ^ flip).astype(np.int8)
+            if p.get("reply", 0):  # slate-compass #116103: a promiser answers a false flag with its own record
+                ff = checked & delivered & flip          # kept, recorded as broken: contested and corrected
+                rec[ff] = 1
+                np.add.at(fit, prom[ff], -p.get("rc", 0.2))
             for who, x in zip(prom[checked], rec[checked]):
                 led[who, pos[who] % W] = x
                 pos[who] += 1
@@ -66,6 +70,26 @@ def run(r, kx, q0, chooser, seed, p=P, types=NT):
         if gen >= p["gens"] - 20:
             hist.append(np.bincount(typ, minlength=NT) / N)
     return np.array(hist).mean(0)
+
+
+def fcell(args):
+    r, e, q0, reply, seeds = args
+    p = dict(P, e=e, reply=reply, rc=0.2)
+    s = np.array([run(r, r, q0, "rep", sd, p=p) for sd in range(seeds)])
+    mu, sd = s.mean(0), s.std(0)
+    return dict(r=r, e=e, q0=q0, reply=reply, K=mu[0], R=mu[1], H=mu[2], X=mu[3], K_sd=sd[0], seeds=seeds)
+
+
+def fsweep(seeds, out):  # PREREG-flags.md: mimic evader, chooser rep
+    from multiprocessing import Pool
+    jobs = [(r, e, q0, rp, seeds) for r in (0.3, 0.5) for e in (0.0, 0.3) for rp in (0, 1)
+            for q0 in (0.0, 0.02, 0.05, 0.1, 0.2, 0.4) if not (e == 0.0 and rp == 1)]
+    with Pool(6) as pool:
+        rows = pool.map(fcell, jobs)
+    for x in rows:
+        print(f"r={x['r']:.1f} e={x['e']:.1f} reply={x['reply']} q0={x['q0']:.2f}  K={x['K']:.2f}+-{x['K_sd']:.2f} "
+              f"R={x['R']:.2f} H={x['H']:.2f} X={x['X']:.2f}", flush=True)
+    json.dump(dict(params=P, rc=0.2, rows=rows), open(out, "w"), indent=1)
 
 
 def cell(args):
@@ -94,7 +118,9 @@ if __name__ == "__main__":
     ap.add_argument("cmd"); ap.add_argument("args", nargs="*")
     ap.add_argument("--seeds", type=int, default=5); ap.add_argument("--out", default="evade.json")
     a = ap.parse_args()
-    if a.cmd == "sweep":
+    if a.cmd == "fsweep":
+        fsweep(a.seeds, a.out)
+    elif a.cmd == "sweep":
         sweep(a.seeds, a.out)
     elif a.cmd == "one":
         r, kx, q0, ch, s = float(a.args[0]), float(a.args[1]), float(a.args[2]), a.args[3], int(a.args[4])
