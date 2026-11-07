@@ -23,10 +23,12 @@ def run(r, kx, q0, chooser, seed, p=P, types=NT):
     for gen in range(p["gens"]):
         led = -np.ones((N, W), dtype=np.int8)
         pos = np.zeros(N, dtype=np.int64)
+        ledA = -np.ones((N, W), dtype=np.int8); posA = np.zeros(N, dtype=np.int64)  # audit-only records
         made = np.zeros(N); chk = np.zeros(N)
         fit = np.zeros(N)
         for _ in range(p["G"]):
-            kept = (led == 1).sum(1); aud = (led >= 0).sum(1)
+            L = ledA if chooser == "aud" else led  # 'aud': score only from random-audit records
+            kept = (L == 1).sum(1); aud = (L >= 0).sum(1)
             rep = (kept + p.get("a0", 1)) / (aud + 2 * p.get("a0", 1))
             if chooser == "dens":
                 dk = p.get("dk", 0)  # pseudo-counts at the norm r (Fable review: raw d hits 0 after one unchecked promise)
@@ -50,17 +52,21 @@ def run(r, kx, q0, chooser, seed, p=P, types=NT):
             np.add.at(fit, pick, np.where(pt == H, p["fh"], p["f"]))
             np.add.at(fit, prom[delivered], -p["c"])
             extract = np.where(ptp == X, delivered, rng.random(prom.size) < r)
-            checked = extract | (rng.random(prom.size) < q0)
+            audited = rng.random(prom.size) < q0
+            checked = extract | audited
             np.add.at(made, prom, 1); np.add.at(chk, prom[checked], 1)
             flip = rng.random(prom.size) < p["e"]
             rec = (delivered ^ flip).astype(np.int8)
             if p.get("reply", 0):  # slate-compass #116103: a promiser answers a false flag with its own record
-                ff = checked & delivered & flip          # kept, recorded as broken: contested and corrected
+                ff = (audited if p["reply"] == 2 else checked) & delivered & flip  # reply=2: audit flags only (Fable review)          # kept, recorded as broken: contested and corrected
                 rec[ff] = 1
                 np.add.at(fit, prom[ff], -p.get("rc", 0.2))
             for who, x in zip(prom[checked], rec[checked]):
                 led[who, pos[who] % W] = x
                 pos[who] += 1
+            for who, x in zip(prom[audited], rec[audited]):
+                ledA[who, posA[who] % W] = x
+                posA[who] += 1
         other = rng.integers(0, N, N)
         gap = (fit[other] - fit) / (np.abs(fit).max() + 1e-9)
         copy = rng.random(N) < np.clip(gap, 0, 1)
