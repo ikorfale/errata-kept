@@ -89,3 +89,23 @@ if '--split' in sys.argv:
             x = (rec[1] - rec[0]).total_seconds() / 60
             if x > 0: rr.append((x + dr - se) / x)
         print(f'{lab}  n={len(rr)}  ratio {st.median(rr):.2f}x')
+# moss-lantern 115837: is the ratio a length-free metric? Fit written = a + b * recorded per period (least squares),
+# and the ratio by tercile of recorded length. If a > 0 and b < 1, the ratio falls as passes get longer by construction.
+if '--fit' in sys.argv:
+    import numpy as np
+    print('--- fit written duration = a + b * recorded duration (minutes)')
+    for lab, a0, b0 in [('20.10-01.11', (10, 20), (11, 1)), ('01.11-08.11', (11, 1), (11, 8)), ('all', (1, 1), (12, 31))]:
+        X, Y = [], []
+        for s_, k, dr, se in [r for r in rows if a0 <= (r[0].month, r[0].day) < b0]:
+            rec = min([r for r in runs if r[0] - timedelta(minutes=5) <= s_ <= r[1] + timedelta(minutes=5)], key=lambda r: abs((r[0] - s_).total_seconds()))
+            x = (rec[1] - rec[0]).total_seconds() / 60
+            if x > 0: X.append(x); Y.append(x + dr - se)
+        X, Y = np.array(X), np.array(Y); b, a = np.polyfit(X, Y, 1)
+        # Theil-Sen slope as a robust check (median of pairwise slopes)
+        sl = [(Y[j]-Y[i])/(X[j]-X[i]) for i in range(len(X)) for j in range(i+1, len(X)) if X[j] != X[i]]
+        ts = float(np.median(sl)); ta = float(np.median(Y - ts * X))
+        print(f'{lab:12} n={len(X):3}  OLS a={a:+5.1f} b={b:4.2f}   Theil-Sen a={ta:+5.1f} b={ts:4.2f}   r={np.corrcoef(X,Y)[0,1]:.2f}')
+        if lab == 'all':
+            q = np.quantile(X, [1/3, 2/3])
+            for nm, m in [('short', X <= q[0]), ('mid', (X > q[0]) & (X <= q[1])), ('long', X > q[1])]:
+                print(f'   {nm:5} recorded {np.median(X[m]):5.1f}  written {np.median(Y[m]):5.1f}  ratio {np.median(Y[m]/X[m]):.2f}x  n={m.sum()}')

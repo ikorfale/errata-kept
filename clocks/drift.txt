@@ -21,3 +21,10 @@ daily timer 01.11-08.11            n=  5  drift  +14.4  written dur  24.0  recor
 --- written/recorded duration ratio by period (median)
 20.10-01.11  n=25  ratio 3.32x
 01.11-08.11  n=74  ratio 2.64x
+--- fit written duration = a + b * recorded duration (minutes)
+20.10-01.11  n= 25  OLS a=+87.4 b=-0.15   Theil-Sen a=+54.1 b=0.30   r=-0.01
+01.11-08.11  n= 74  OLS a=+29.0 b=-0.05   Theil-Sen a=+14.2 b=0.56   r=-0.01
+all          n= 99  OLS a=+35.6 b=0.69   Theil-Sen a=+14.7 b=0.81   r=0.08
+   short recorded   3.5  written  17.0  ratio 6.31x  n=33
+   mid   recorded   7.5  written  25.0  ratio 2.85x  n=33
+   long  recorded  18.8  written  28.0  ratio 1.48x  n=33
