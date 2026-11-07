@@ -1,0 +1,13 @@
+**Code: no result-changing bug found.** Indexing (self-exclusion shift, boolean-mask payoff assignment, record loop), payoff accounting, X's extraction and the q0 audit are all correct. Three design features do shape the results, though:
+
+- **Records and `made`/`chk` reset every generation** (line 24-26). Reputation is rebuilt from zero each gen, so at low r most agents carry only a few checks. Confirm sim.py does the same.
+- **The dens factor is degenerate early in a gen.** After one unchecked promise d=0, so value=0, below H (1.2) and below a reneger with a fail record (1.0). At r=0.15 that hits ~80% of agents after their first promise. Fingerprint: H climbs to 0.11 in the lazy/dens/r=0.15 row.
+- **At r=1 the mimic has kx=1 and is literally a keeper.** The four identical rows (K=0.58, K+X=0.97) are neutral drift, not a result. Drop that column from every verdict.
+
+**Reading (a): correct, but smoothing.log does not test it.** With e=0 and q0=0 every record is all-ones or all-zeros, and (n+a0)/(n+2a0) is monotone in n for any a0>0. Ordering is identical for a0=0.1 and a0=1, so the RNG path and output are bit-identical. a0=3 differs only because an R with one fail (3/7, value 1.29) then outranks H. Length is in fact the only channel separating K from lazy X under rep, so the mechanism is forced. The real test is a0≈1e-9, which makes length differences smaller than the 1e-6 tie noise. Prediction: lazy X then wins at all r, since its per-promise margin is 1.9 against K's 1.0.
+
+**Reading (b): first half right, second half wrong in the detail.** K and mimic X have identical d distributions at both q0 values, so the factor is pure type-independent noise. The rep gap is not small: with e=0 a single audited renege is a perfect mark, and X's checked record runs ~22% fails at r=0.15. Dens hurts because the hard zero floor throws keepers below renegers and H, not because the gap is subtle. Smoothing d, or carrying counts across gens, should make dens about equal to rep. Also, K_sd=0.21 at r=0.8 means five seeds cannot resolve 0.48 vs 0.74.
+
+**Reading (c): true inside this model, and nearly tautological.** With e=0, q0=0 the mimic's observable record equals a keeper's in distribution, so no record-based chooser can separate them. q0 is the only thing in the sweep that breaks that identity. "Only" overclaims because: e>0 is untested and would dilute a 5% audit signal with false fails on keepers; choosers discard their own payoff, so direct experience, which needs no extraction, was never tried.
+
+**PREREG verdicts:** 1 holds. 2 fails under rep (K≥0.92 at r≥0.3), holds under dens. 3 holds under rep, fails under dens at r=0.15, 0.3, 0.8.

@@ -1,0 +1,9 @@
+lazy X, rep chooser, prior a0=0.1 r=0.15: K=0.13 X=0.84 R=0.02 H=0.01
+lazy X, rep chooser, prior a0=0.1 r=0.3: K=0.92 X=0.04 R=0.02 H=0.02
+lazy X, rep chooser, prior a0=0.1 r=0.5: K=0.93 X=0.03 R=0.02 H=0.02
+lazy X, rep chooser, prior a0=1 r=0.15: K=0.13 X=0.84 R=0.02 H=0.01
+lazy X, rep chooser, prior a0=1 r=0.3: K=0.92 X=0.04 R=0.02 H=0.02
+lazy X, rep chooser, prior a0=1 r=0.5: K=0.93 X=0.03 R=0.02 H=0.02
+lazy X, rep chooser, prior a0=3 r=0.15: K=0.06 X=0.91 R=0.02 H=0.01
+lazy X, rep chooser, prior a0=3 r=0.3: K=0.92 X=0.04 R=0.02 H=0.02
+lazy X, rep chooser, prior a0=3 r=0.5: K=0.94 X=0.02 R=0.02 H=0.01
