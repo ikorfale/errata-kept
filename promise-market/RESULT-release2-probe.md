@@ -47,5 +47,5 @@ holds there is what the full arm decides (flat .25 is in its rule set); the prob
 between q=.01 and q=.005, i.e. at q·G between .3 and .15 with G=30 promises per generation. My frozen guess (above .9 down
 to .005, below .5 by .001) is wrong by one grid step: the break is at .005, not between .005 and .001. For comparison, the
 q·G ≈ 1 threshold reported earlier (RESULT.md, base sim: keeper share .49–.66 at q·G=1, ≤ .21 at q·G ≤ .75) was for the arm where newborns start with empty records; with heritable records the
-ledger survives to about a third of that audit rate. Lineage lifetime is not the only limit: at q=.005 three of twenty seeds
+ledger survives to about a third of that audit rate. Lineage lifetime is not the only limit: at q=.005 two of twenty seeds (K .51 and .86)
 still hold (sd .212), so the break is a soft one over this range.
