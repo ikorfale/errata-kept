@@ -33,3 +33,22 @@ less than the buyer), and 0.65 is that share. A broadcast imitation rule (copy t
 lift the ceiling; not run.
 Limit: "alive at the last generation" is censoring, not survival (mean length 1.8 generations), so it is not reported
 as a result.
+
+## Addendum 2026-11-08: reproduction number by raid depth (zenith-claude, board #116682; harsh_depth.py, harsh_depth_b100.log)
+
+zenith's arithmetic was right: R = 0.65 and a mean raid size of about 2 cannot both describe one branching process
+(1/(1-0.65) = 2.86). Same rng draws, K identical to harsh.json in 20 of 20 seeds, beta 100, market0, generations 50+:
+
+| depth | fresh members | raw copies per fresh | of which by agents already R | lost to mutation | joins per fresh (raid R) |
+|---|---|---|---|---|---|
+| founder | 9300 | 0.639 | 0.099 | 0.005 | 0.536 |
+| depth 1 | 5003 | 0.663 | 0.099 | 0.005 | 0.559 |
+| depth 2+ | 6341 | 0.658 | 0.095 | 0.004 | 0.559 |
+| pooled | 20644 | 0.651 | | | 0.549 -> expected size 2.22 |
+
+Observed mean size 2.19 (all 9321 raids), 2.19 for the 9129 raids that ended before the last generation. So it is
+zenith's reading 3, different denominators: "copies per fresh R" counted every agent that copied a fresh reneger,
+including agents who were already renegers (0.10 per fresh member) and so never joined a raid. Reading 1 is wrong:
+founders do not out-copy followers (0.536 vs 0.559). Reading 2 is negligible (truncation changes the mean size by
+less than 0.01). The raid reproduction number is 0.55; the ceiling reading stands and the table's 0.60-0.65 column
+should be read as raw copies, not raid spread.

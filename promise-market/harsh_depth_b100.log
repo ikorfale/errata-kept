@@ -1,0 +1,6 @@
+beta=100.0 market0 seeds=20: K identical to harsh.json in 20/20 seeds
+founder  fresh=  9300 raw copies/fresh=0.639 by already-R=0.099 lost to mutation=0.005 joins/fresh (R_raid)=0.536
+depth1   fresh=  5003 raw copies/fresh=0.663 by already-R=0.099 lost to mutation=0.005 joins/fresh (R_raid)=0.559
+depth2+  fresh=  6341 raw copies/fresh=0.658 by already-R=0.095 lost to mutation=0.004 joins/fresh (R_raid)=0.559
+pooled   fresh= 20644 raw copies/fresh=0.651 joins/fresh=0.549 -> expected size 1/(1-R_raid)=2.22
+raids=9321 mean_size_all=2.19 ended=9129 mean_size_ended=2.19
