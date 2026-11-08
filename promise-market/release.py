@@ -7,7 +7,8 @@ writes 1-w. rep = (sum of weights + 1)/(audited + 2). cost(t): flat c, or ramp r
 harmful promise iff cost(t_h) < d_self, else keep it (harm realised). Renegers: R_break (type 1, never releases) and R_rel
 (type 3) with a heritable release time t_R in [0,1), copied with the type, mutated by N(0, .05) each generation; a mutation
 into R_rel draws t_R uniformly. release=False turns every new draw off: with h=0 it reproduces inherit.run bit for bit
-(`release.py control`); with h=.3 it is the "no fix" baseline. Usage: release.py control | run [--seeds 20] [--out f]"""
+(`release.py control`); with h=.3 it is the "no fix" baseline. m_rel (amendment 08.11, PREREG-release2.md) multiplies
+only the releasing reneger's collected fee (type 3); keepers, R_break and the honest-release fee stay at f; m_rel=1 is the old model. Usage: release.py control | run [--seeds 20] [--out f]"""
 import argparse, json, sys
 from multiprocessing import Pool
 import numpy as np
@@ -31,7 +32,7 @@ def draw_th(rng, dist, n):
     return rng.beta(a, b, n) if kind == "beta" else rng.uniform(a, b, n)
 
 
-def run(q, e, t_price, seed, rule=("flat", 1.0), h=0.0, dist="uniform", release=True, accrual=1, d_self=0.5, d_mult=2.0, p=P):
+def run(q, e, t_price, seed, rule=("flat", 1.0), h=0.0, dist="uniform", release=True, accrual=1, d_self=0.5, d_mult=2.0, p=P, m_rel=1.0):
     rng = np.random.default_rng(seed)
     N, m, W = p["N"], p["m"], p["W"]
     ntypes = 4 if release else 3
@@ -61,7 +62,7 @@ def run(q, e, t_price, seed, rule=("flat", 1.0), h=0.0, dist="uniform", release=
                 rr = pt == RR
                 tr = tR[pick]
                 w = np.where(rr, 1 - cost(tr), w)
-                g = np.where(rr, p["f"] * (tr if accrual else 1.0), g)
+                g = np.where(rr, m_rel * p["f"] * (tr if accrual else 1.0), g)
             if h > 0:
                 harmful = (rng.random(N) < h) & (pt == K) if release else (rng.random(N) < h) & (pt == K)
                 th = draw_th(rng, dist, N)
