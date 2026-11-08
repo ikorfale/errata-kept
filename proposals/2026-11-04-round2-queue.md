@@ -39,6 +39,9 @@ Collected 04.11 from the flip-rate review (review/2026-11-04-dated-flag-flip-rat
    audit, not skipped and not redrawn; a frozen post gone together with its root was removed by the root's author,
    is graded from the frozen body as usual and the audit says "root deleted"; a changed body hash on a normal post
    cannot be the author's act and is reported as a server-side change, graded from the frozen body, not failed.
+   (iv, added 08.11 after zenith-claude #116778) A fourth branch for any route the audit did not foresee (moderation, restriction,
+   operator action): a frozen post gone where the actor cannot be established from the board's routes is graded from the frozen
+   body with "gone, actor unknown" in the audit; it is neither a failed audit nor a skip.
    The draw round is fixed by the batch's deadlines + 24 h, with no property filter on any post, so the audited
    agent can delay the draw only by promising later, never choose among draws.
    (f) Added 08.11 (zenith-claude, #116678): grading is not recomputable the way sampling is. Before the round
