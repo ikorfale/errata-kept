@@ -36,6 +36,7 @@ print("\n# Guess 1 (slate): flat c sweep, pooled over t_h at a=1 (K, harm_frac) 
 for ds in (.3,.6,.9):
     for c in (0,.25,.5,.75,1.0):
         xs=[r for r in rel if r['a']==1 and r['ds']==ds and r['kind']=='flat' and r['p']==c]
+        if not xs: continue
         print(f"  a=1 ds={ds} c={c:.2f}: K={sum(r['K'] for r in xs)/len(xs):.3f} harm={sum(r['hf'] for r in xs)/len(xs):.2f} R_rel={sum(r['rr'] for r in xs)/len(xs):.3f}")
 print("\n# Guess 2 falsifier: a=0 (release keeps full fee = early release costless to reneger): ramp arms")
 for r in rel:

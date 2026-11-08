@@ -1,0 +1,23 @@
+rows parsed: 64
+
+# Per cell: best flat (by K-harm), ramps, verdicts. 'beats' = difference > 2*sd of the flat's seeds
+t_h     a  ds   | best flat c  K-harm (K, harm) | ramp .5 | ramp .75 | ramp 1.0 | ramp1>bestflat? capped(.5)~bestflat?
+early   0  0.3  | c=0.25 +0.875 (0.875,0.00) | -0.053-| -0.203-| -0.329-|  r1 vs best flat: -   r.5 vs best mid c=0.25: -  r.75: -
+early   1  0.3  | c=0.25 +0.845 (0.845,0.00) | +0.841=| +0.712=| +0.586=|  r1 vs best flat: =   r.5 vs best mid c=0.25: =  r.75: =
+last5   0  0.3  | c=0.25 +0.889 (0.889,0.00) | -0.986-| -0.955-| -0.896-|  r1 vs best flat: -   r.5 vs best mid c=0.25: -  r.75: -
+last5   1  0.3  | c=0.25 +0.918 (0.918,0.00) | -0.067-| -0.062-| -0.062-|  r1 vs best flat: -   r.5 vs best mid c=0.25: -  r.75: -
+late    0  0.3  | c=0.25 +0.897 (0.897,0.00) | -0.771-| -0.904-| -0.959-|  r1 vs best flat: -   r.5 vs best mid c=0.25: -  r.75: -
+late    1  0.3  | c=0.25 +0.927 (0.927,0.00) | +0.147-| +0.005-| -0.029-|  r1 vs best flat: -   r.5 vs best mid c=0.25: -  r.75: -
+uniform 0  0.3  | c=0.25 +0.900 (0.900,0.00) | -0.386-| -0.586-| -0.687-|  r1 vs best flat: -   r.5 vs best mid c=0.25: -  r.75: -
+uniform 1  0.3  | c=0.25 +0.916 (0.916,0.00) | +0.519-| +0.334-| +0.239-|  r1 vs best flat: -   r.5 vs best mid c=0.25: -  r.75: -
+
+# Guess 1 (slate): flat c sweep, pooled over t_h at a=1 (K, harm_frac) by c and ds
+  a=1 ds=0.3 c=0.00: K=0.014 harm=0.00 R_rel=0.960
+  a=1 ds=0.3 c=0.25: K=0.901 harm=0.00 R_rel=0.059
+  a=1 ds=0.3 c=0.50: K=0.942 harm=1.00 R_rel=0.024
+  a=1 ds=0.3 c=0.75: K=0.945 harm=1.00 R_rel=0.020
+  a=1 ds=0.3 c=1.00: K=0.946 harm=1.00 R_rel=0.021
+
+# Guess 2 falsifier: a=0 (release keeps full fee = early release costless to reneger): ramp arms
+
+# Reneger release time tR by arm (a=1): do renegers sit at the ramp crossing?
