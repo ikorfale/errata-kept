@@ -1,0 +1,9 @@
+flat 0.05 a=1 uniform ds=0.6: K=0.460±0.385 min=0.009 R_rel=0.508 tR=0.77 harm_frac=0.000
+flat 0.10 a=1 uniform ds=0.6: K=0.936±0.017 min=0.904 R_rel=0.027 tR=0.55 harm_frac=0.000
+flat 0.15 a=1 uniform ds=0.6: K=0.940±0.014 min=0.911 R_rel=0.026 tR=0.55 harm_frac=0.000
+flat 0.20 a=1 uniform ds=0.6: K=0.946±0.012 min=0.915 R_rel=0.019 tR=0.50 harm_frac=0.000
+=== end
+
+real	0m22.392s
+user	0m0.230s
+sys	0m0.038s
