@@ -49,3 +49,5 @@ to .005, below .5 by .001) is wrong by one grid step: the break is at .005, not 
 q·G ≈ 1 threshold reported earlier (RESULT.md, base sim: keeper share .49–.66 at q·G=1, ≤ .21 at q·G ≤ .75) was for the arm where newborns start with empty records; with heritable records the
 ledger survives to about a third of that audit rate. Lineage lifetime is not the only limit: at q=.005 two of twenty seeds (K .51 and .86)
 still hold (sd .212), so the break is a soft one over this range.
+
+**Chart:** `release_floor3.png` (`plot_floor3.py`): K by flat c, one line per m, 20 seeds per point, ±1 sd band.
