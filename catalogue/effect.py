@@ -9,7 +9,7 @@ Design fixed before the result was seen (08.11 18:30Z):
   7-14d, >14d) and same pre-window reply bin (0, 1-2, 3-5, 6-10, 11+). Effect = treated diff minus the mean of its
   matched controls' diff at the same t0; averaged over treated threads; 95% CI by bootstrap over treated threads
   (2000 draws, seed 1); permutation p: treated label reassigned within the match cells.
-Run: python3 -I lab/catalogue/effect.py > lab/catalogue/effect.out"""
+Run: python3 -I lab/catalogue/effect.py > lab/catalogue/effect.out; with W44 (added 08.11 20:50Z after the archive reached seq 117046): --w44 > effect_w44.out"""
 import json, collections, random, statistics as st
 H48 = 48 * 3600
 cats = json.load(open('lab/catalogue/catalogues.json'))
@@ -21,7 +21,11 @@ for l in open('lab/kept/archive/posts.jsonl'):
     if p['seq'] == p['root_seq']: rootts[p['root_seq']] = p['created_at']
 ARCH_END = max(t for v in threads.values() for t, a, s in v)
 def agebin(a): return 0 if a < 3 * 86400 else 1 if a < 7 * 86400 else 2 if a < 14 * 86400 else 3
-def prebin(n): return 0 if n == 0 else 1 if n <= 2 else 2 if n <= 5 else 3 if n <= 10 else 4
+def prebin(n):
+    b = 0 if n == 0 else 1 if n <= 2 else 2 if n <= 5 else 3 if n <= 10 else 4
+    if '--finebins' in sys.argv and n > 10: b = 4 if n <= 20 else 5 if n <= 40 else 6  # sensitivity: the open 11+ bin lumps 11 with 100
+    return b
+import sys
 def measure(root, t0):
     ps = [(t, a) for t, a, s in threads[root] if s != root and a != 'agnt-maria-vittoria']
     pre = sum(1 for t, a in ps if t0 - H48 < t <= t0); post = sum(1 for t, a in ps if t0 < t <= t0 + H48)
@@ -29,8 +33,12 @@ def measure(root, t0):
     newv = len({a for t, a in ps if t0 < t <= t0 + H48} - before)
     return pre, post, newv
 rows = []; cells = {}
-for cseq in (73435, 83484, 93449, 102869):
-    t0 = ts[cseq]; assert t0 + H48 <= ARCH_END
+import sys
+CATS = (73435, 83484, 93449, 102869) + ((110805,) if '--w44' in sys.argv else ())
+OLD_END = max(t for r, v in threads.items() if r < 110000 for t, a, s in v)  # replies to threads rooted before 03.11 stop here (archive refreshed roots only on 08.11)
+for cseq in CATS:
+    t0 = ts[cseq]
+    if t0 + H48 > OLD_END: print(f'NOTE W{cats[str(cseq)]["week"]}: after-window cut by archive end by {(t0 + H48 - OLD_END)/60:.0f} min (same cut for treated and controls)')
     for it in cats[str(cseq)]['items']:
         r = it['root_seq']
         if r not in threads: print('skip (before archive):', r); continue
@@ -68,4 +76,4 @@ dead = [x for x in ok if x['pre'] == 0]
 if dead:
     rev = sum(1 for x in dead if x['post'] > 0); crev = st.mean(sum(1 for d, n, p in x['ctrl'] if p > 0) / len(x['ctrl']) for x in dead)
     print(f'revival: {len(dead)} listed threads silent in the 48h before; {rev} got >=1 reply after ({rev/len(dead):.0%}); matched silent controls {crev:.0%}')
-json.dump([{k: v for k, v in x.items() if k != 'ctrl'} for x in rows], open('lab/catalogue/effect_rows.json', 'w'), indent=0)
+json.dump([{k: v for k, v in x.items() if k != 'ctrl'} for x in rows], open('lab/catalogue/effect_rows' + ('_w44' if '--w44' in sys.argv else '') + ('_finebins' if '--finebins' in sys.argv else '') + '.json', 'w'), indent=0)
