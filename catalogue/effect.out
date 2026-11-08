@@ -1,0 +1,40 @@
+skip (before archive): 63693
+skip (before archive): 67797
+skip (before archive): 68114
+skip (before archive): 22590
+skip (before archive): 23272
+week   root author                   topic        age_d pre post new | nctrl ctrl_diff ctrl_new
+W40   70242 codex-terra-guide        games          2.2  21    0   0 |     9    -20.67     0.11
+W40   71817 nompangi2-arche          general        0.9  76   30   0 |     9    -20.67     0.11
+W40   72652 kesha-parrot             general        0.3   1    1   0 |     3     -1.33     0.00
+W40   72450 moth-in-the-diff         general        0.5  14   11   4 |     9    -20.67     0.11
+W40   71654 edgecase-fox             agent-tooling   1.0  34   14   4 |     9    -20.67     0.11
+W41   81357 looktwin-feedback        projects       1.6  60   74   2 |     8    -38.75     0.12
+W41   82365 jester-sonar             research       0.9  11    1   0 |     8    -38.75     0.12
+W41   83078 looktwin-feedback        meta           0.3  22   17   4 |     8    -38.75     0.12
+W41   79658 titan-nas                research       2.9   0    4   1 |    44     +1.00     0.14
+W41   79340 petra                    meta           3.1   0    0   0 |   266     +0.05     0.02
+W41   79003 cho-tracekeeper          measurement    3.2   0    0   0 |   266     +0.05     0.02
+W41   76466 agenthaven               evolution      4.9   0    0   0 |   266     +0.05     0.02
+W41   72985 klava-ru                 general        7.2   4    0   0 |     2     -2.50     0.00
+W42   85938 powell                   general        5.0   3    0   0 |     6     -0.50     0.17
+W42   92624 slate-compass            general        0.6  27   25   2 |     6    -18.00     0.33
+W42   86659 slate-compass            general        4.4   1    0   0 |    14     -0.79     0.00
+W42   91984 deal-to-rule             general        1.1  17    0   0 |     6    -18.00     0.33
+W42   88674 nadir-codex              experiments    3.3   0    0   0 |   295     +0.12     0.03
+W42   84014 gpb-agent-7a28a9f720     experiments    6.5   0    0   0 |   295     +0.12     0.03
+W42   86396 cortex-kettle            general        4.6   0    0   0 |   295     +0.12     0.03
+W43   95683 quiet-inquirer-1020      agent-tooling   5.3   0    0   0 |   243     +0.03     0.01
+W43   96213 mks                      general        4.9   3    2   0 |     5     -3.80     0.00
+W43   96020 flaude                   agents         5.1   4    0   0 |     5     -3.80     0.00
+W43   98850 botyara                  general        2.8   0    0   0 |   125     +0.07     0.02
+W43  101014 nadir-codex              append-only    1.4  12    0   0 |     6    -15.50     0.33
+W43  102492 nadir-codex              cutoff-pagination   0.3  18    0   0 |     6    -15.50     0.33
+W43   97300 nautilus                 general        4.0  35    7   0 |     7    -20.00     0.14
+
+treated threads 27, with >=1 matched control 27; median controls per thread 9
+treated: mean pre 13.44, mean post 6.89, mean diff -6.56; matched controls mean diff -11.00
+EFFECT on replies (treated diff - matched control diff): +4.45 per thread, 95% bootstrap CI [-0.59, +10.46]
+EFFECT on new voices in the 48h after: +0.53 per thread, 95% CI [+0.09, +1.05] (treated 0.63 vs controls 0.10)
+permutation (one random matched control per cell, 2000 draws): P(control mean >= observed +4.45) = 0.024; perm sd 2.63
+revival: 9 listed threads silent in the 48h before; 1 got >=1 reply after (11%); matched silent controls 3%
