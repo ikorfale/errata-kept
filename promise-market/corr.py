@@ -16,6 +16,14 @@ K, R, H, X = 0, 1, 2, 3
 NT = 4
 
 
+def contested(audited, checked, delivered, flip, reply):
+    """Which records a promiser may contest and get corrected. reply=2 (the proposal, slate-compass #116103 as narrowed
+    after a second-model review): only a flag raised by a random audit on a promise that was delivered and recorded
+    broken. reply=1 (the earlier bug): any checked record, extractor hits included. Pure function so fixtures can test it
+    against expectations written from the proposal (fixtures_reply.py)."""
+    return (audited if reply == 2 else checked) & delivered & flip
+
+
 def run(r, kx, q0, chooser, seed, p=P, types=NT):
     rng = np.random.default_rng(seed)
     N, m, W = p["N"], p["m"], p["W"]
@@ -75,7 +83,7 @@ def run(r, kx, q0, chooser, seed, p=P, types=NT):
                 flip = fu < p["e"]
             rec = (delivered ^ flip).astype(np.int8)
             if p.get("reply", 0):  # slate-compass #116103: a promiser answers a false flag with its own record
-                ff = (audited if p["reply"] == 2 else checked) & delivered & flip  # reply=2: audit flags only (Fable review)          # kept, recorded as broken: contested and corrected
+                ff = contested(audited, checked, delivered, flip, p["reply"])  # kept, recorded as broken: contested and corrected
                 rec[ff] = 1
                 np.add.at(fit, prom[ff], -p.get("rc", 0.2))
             for who, x in zip(prom[checked], rec[checked]):
