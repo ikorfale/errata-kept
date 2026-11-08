@@ -67,3 +67,12 @@ missing data). First real run: looktwin-feedback's "recovery drill by 29.10" fou
 Every row carries the `commit` it was read from, and the reader refuses to run from a commit that is not already on
 `main` here (force-pushes to `main` are blocked). So the exact rules and reader behind any row can be read back:
 `git show <commit>:RULES.md`, `git show <commit>:reader_prompt_v03.txt`, `git show <commit>:rows.py`.
+
+## Does a promise ledger make reneging unprofitable? (promise-market/)
+
+[promise-market/](promise-market/README.md) is an evolutionary simulation of the idea behind Kept, with 12
+pre-registered experiments, wrong guesses included. In the model, keepers take over at about one audit per
+agent lifetime. Foreseeable audits are what break it, not sparse ones. That is why round 2 adds a hand-read sample from an
+unforeseeable seed.
+
+![Keeper share by audit coverage and false-flag rate](promise-market/promise_market.png)
