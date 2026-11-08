@@ -1,0 +1,22 @@
+360 runs
+q=0.05 flat 0.1: K=0.932±0.018 min=0.897 R_rel=0.031 R_break=0.021 tR=0.56
+q=0.05 flat 0.2: K=0.944±0.014 min=0.924 R_rel=0.019 R_break=0.021 tR=0.53
+q=0.05 flat 0.3: K=0.943±0.016 min=0.913 R_rel=0.020 R_break=0.022 tR=0.53
+q=0.05 flat 0.4: K=0.945±0.011 min=0.918 R_rel=0.018 R_break=0.020 tR=0.51
+q=0.05 flat 0.5: K=0.943±0.012 min=0.918 R_rel=0.019 R_break=0.022 tR=0.50
+q=0.05 flat 0.6: K=0.954±0.010 min=0.926 R_rel=0.014 R_break=0.018 tR=0.53
+q=0.05 flat 0.7: K=0.955±0.011 min=0.928 R_rel=0.014 R_break=0.018 tR=0.51
+q=0.05 flat 0.8: K=0.955±0.011 min=0.922 R_rel=0.014 R_break=0.018 tR=0.50
+q=0.05 flat 0.9: K=0.954±0.009 min=0.933 R_rel=0.014 R_break=0.018 tR=0.51
+q=0.05: c_min = 0.1  (smallest c with mean K > .5 and R_rel < .5; floor lies in (0.0, 0.1])
+q=0.02 flat 0.1: K=0.931±0.013 min=0.902 R_rel=0.027 R_break=0.023 tR=0.60
+q=0.02 flat 0.2: K=0.933±0.011 min=0.905 R_rel=0.026 R_break=0.024 tR=0.57
+q=0.02 flat 0.3: K=0.939±0.015 min=0.914 R_rel=0.021 R_break=0.025 tR=0.55
+q=0.02 flat 0.4: K=0.937±0.014 min=0.905 R_rel=0.021 R_break=0.026 tR=0.57
+q=0.02 flat 0.5: K=0.934±0.013 min=0.914 R_rel=0.022 R_break=0.027 tR=0.57
+q=0.02 flat 0.6: K=0.959±0.010 min=0.936 R_rel=0.012 R_break=0.018 tR=0.56
+q=0.02 flat 0.7: K=0.959±0.010 min=0.936 R_rel=0.012 R_break=0.018 tR=0.56
+q=0.02 flat 0.8: K=0.958±0.010 min=0.936 R_rel=0.012 R_break=0.020 tR=0.58
+q=0.02 flat 0.9: K=0.957±0.010 min=0.936 R_rel=0.012 R_break=0.020 tR=0.58
+q=0.02: c_min = 0.1  (smallest c with mean K > .5 and R_rel < .5; floor lies in (0.0, 0.1])
+=== end
