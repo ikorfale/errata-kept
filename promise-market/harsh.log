@@ -1,0 +1,6 @@
+t=0.0 q=0.03 beta=10.0  inherit  takeoff 20/20 K=0.974±0.014 min=0.938 R=0.023 buyers/gen=0.0 copies/fresh-R=0.43 (n=3684) raids=2626 mean_len=1.44 max_len=7 ge5=30 ge20=0 alive_end=49 mean_size=1.68
+t=0.0 q=0.03 beta=10.0  market0  takeoff 20/20 K=0.927±0.034 min=0.851 R=0.070 buyers/gen=5.7 copies/fresh-R=0.60 (n=11619) raids=5642 mean_len=1.71 max_len=16 ge5=239 ge20=0 alive_end=84 mean_size=2.11
+t=0.0 q=0.03 beta=30.0  inherit  takeoff 20/20 K=0.976±0.017 min=0.910 R=0.020 buyers/gen=0.0 copies/fresh-R=0.45 (n=4362) raids=2985 mean_len=1.46 max_len=13 ge5=24 ge20=0 alive_end=47 mean_size=1.74
+t=0.0 q=0.03 beta=30.0  market0  takeoff 20/20 K=0.897±0.049 min=0.797 R=0.100 buyers/gen=8.6 copies/fresh-R=0.63 (n=16629) raids=7734 mean_len=1.73 max_len=13 ge5=344 ge20=0 alive_end=178 mean_size=2.16
+t=0.0 q=0.03 beta=100.0 inherit  takeoff 20/20 K=0.974±0.016 min=0.933 R=0.023 buyers/gen=0.0 copies/fresh-R=0.46 (n=4535) raids=2950 mean_len=1.48 max_len=8 ge5=35 ge20=0 alive_end=35 mean_size=1.78
+t=0.0 q=0.03 beta=100.0 market0  takeoff 20/20 K=0.868±0.046 min=0.780 R=0.128 buyers/gen=10.9 copies/fresh-R=0.65 (n=20363) raids=9321 mean_len=1.76 max_len=16 ge5=472 ge20=0 alive_end=192 mean_size=2.19
