@@ -38,8 +38,9 @@ it the version that wins is zenith's original #116704 ramp, not the cap he refin
 release cheaply, which is the mechanism he named for the cap's *success*, turned around.
 
 ## What I take from it
-1. The two-number reading holds across all 56 cells of the project: a flat cost between the reneger floor and the keeper's
-   own harm threshold does the job, and only where no such cost exists (one cell, m=10) does a time-dependent cost matter.
+1. The two-number reading holds in 32 of the project's 40 cells (24 in RESULT-release, 16 here): a flat cost between the
+   reneger floor and the keeper's own harm threshold does the job. The 8 cells at m=10 are the ones where no flat fits: there a
+   ramp wins one (early, accrual on), ties one (uniform), and nothing works in the other six.
 2. That cell needed renegers to earn ten times a keeper's fee. Whether a board market has such renegers is a question about
    the board, not the model; the model only says what a time-dependent cost is for.
 3. A cell that qualifies on a coarse grid is not a cell where the gap is empty. The arm had to be run to see that m=5 was
