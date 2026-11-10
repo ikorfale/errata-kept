@@ -16,14 +16,6 @@ K, R, H, X = 0, 1, 2, 3
 NT = 4
 
 
-def contested(audited, checked, delivered, flip, reply):
-    """Which records a promiser may contest and get corrected. reply=2 (the proposal, slate-compass #116103 as narrowed
-    after a second-model review): only a flag raised by a random audit on a promise that was delivered and recorded
-    broken. reply=1 (the earlier bug): any checked record, extractor hits included. Pure function so fixtures can test it
-    against expectations written from the proposal (fixtures_reply.py)."""
-    return (audited if reply == 2 else checked) & delivered & flip
-
-
 def run(r, kx, q0, chooser, seed, p=P, types=NT):
     rng = np.random.default_rng(seed)
     N, m, W = p["N"], p["m"], p["W"]
@@ -33,6 +25,7 @@ def run(r, kx, q0, chooser, seed, p=P, types=NT):
     if cp:
         e_lo = (p["e"] - cp[0] * cp[1]) / (1 - cp[0])
     hist = []; hb = []
+    rrng = np.random.default_rng(seed + 2 * 10**6); st = [[0, 0], [0, 0]]  # contests, upheld replies by promiser bit
     for gen in range(p["gens"]):
         led = -np.ones((N, W), dtype=np.int8)
         pos = np.zeros(N, dtype=np.int64)
@@ -83,8 +76,19 @@ def run(r, kx, q0, chooser, seed, p=P, types=NT):
                 flip = fu < p["e"]
             rec = (delivered ^ flip).astype(np.int8)
             if p.get("reply", 0):  # slate-compass #116103: a promiser answers a false flag with its own record
-                ff = contested(audited, checked, delivered, flip, p["reply"])  # kept, recorded as broken: contested and corrected
-                rec[ff] = 1
+                ff = (audited if p["reply"] == 2 else checked) & delivered & flip  # reply=2: audit flags only (Fable review)          # kept, recorded as broken: contested and corrected
+                rd = p.get("reader")  # of-course-i-still-love-you #117410: (rho,) reader shares the flagger's bias with prob rho
+                if rd is not None:
+                    rr = rrng.random((2, prom.size))  # own stream: reader=None leaves every other draw unchanged
+                    b1 = bit[prom]
+                    er = np.where(b1 & (rr[0] < rd[0]), cp[1], e_lo)
+                    ok = ff & (rr[1] >= er)
+                    if gen >= p["gens"] - 20:
+                        for g in (0, 1):
+                            sel = ff & (b1 == g); st[g][0] += sel.sum(); st[g][1] += (ok & sel).sum()
+                else:
+                    ok = ff
+                rec[ok] = 1
                 np.add.at(fit, prom[ff], -p.get("rc", 0.2))
             for who, x in zip(prom[checked], rec[checked]):
                 led[who, pos[who] % W] = x
@@ -105,6 +109,8 @@ def run(r, kx, q0, chooser, seed, p=P, types=NT):
             hist.append(np.bincount(typ, minlength=NT) / N)
             hb.append([(typ[bit] == K).mean() if bit.any() else np.nan, (typ[~bit] == K).mean(), fr])
     if p.get("splitout"):
+        if p.get("reader") is not None:
+            return np.array(hist).mean(0), np.array(hb).mean(0), st
         return np.array(hist).mean(0), np.array(hb).mean(0)
     return np.array(hist).mean(0)
 
