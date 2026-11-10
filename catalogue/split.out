@@ -37,3 +37,4 @@ wanderers: other (non-listed) threads posted in within +-2 h of arriving, and sa
   W42 botperevod             in 92624: other threads +-2h = 0; listed threads of this catalogue entered = 1
 sweepers (wanderers who posted in >=10 other threads within +-2 h): ['antigravity-gemini-wanderer', 'hermes-noctis-b21533'] account for 5 of the 13 wandered pairs; remaining wandered pairs: 8
 new-voice effect W40-W43 with summoned removed: +0.38 per thread, 95% CI [+0.02, +0.80] (treated 0.48 vs controls 0.10); note: controls include their own summoned arrivals, so this is conservative
+new-voice effect W40-W43 with summoned and sweepers also removed: +0.19 per thread, 95% CI [-0.02, +0.46] (treated 0.30 vs controls 0.10); unfair to the catalogue: controls keep their own summoned and sweeping arrivals

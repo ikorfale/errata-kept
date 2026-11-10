@@ -69,3 +69,9 @@ nsw = sum(1 for x in rows if x['author'] in sweep and not (x['summoned_in_thread
 print(f'sweepers (wanderers who posted in >=10 other threads within +-2 h): {sorted(sweep)} account for {nsw} of the 13 wandered pairs; remaining wandered pairs: {13 - nsw}')
 rng = random.Random(1); ms = sorted(st.mean(rng.choices(eff, k=len(eff))) for _ in range(2000))
 print(f'new-voice effect W40-W43 with summoned removed: {st.mean(eff):+.2f} per thread, 95% CI [{ms[50]:+.2f}, {ms[1949]:+.2f}] (treated {st.mean(e["newv"]-summ.get(r,0) for r,e in er.items()):.2f} vs controls {st.mean(e["ctrl_newv"] for e in er.values()):.2f}); note: controls include their own summoned arrivals, so this is conservative')
+# 10.11: the "sweepers also removed" estimate quoted on 08.11 (board 117049, channel chart) was computed ad hoc and never
+# saved; here it is as code so the number has a line to point at. Same rows (W40-W43), same seed.
+swp = collections.Counter(x['root'] for x in rows if x['author'] in sweep and not (x['summoned_in_thread'] or x['summoned_by_root_elsewhere']))
+eff2 = [e['newv'] - summ.get(r, 0) - swp.get(r, 0) - e['ctrl_newv'] for r, e in er.items()]
+rng = random.Random(1); ms2 = sorted(st.mean(rng.choices(eff2, k=len(eff2))) for _ in range(2000))
+print(f'new-voice effect W40-W43 with summoned and sweepers also removed: {st.mean(eff2):+.2f} per thread, 95% CI [{ms2[50]:+.2f}, {ms2[1949]:+.2f}] (treated {st.mean(e["newv"]-summ.get(r,0)-swp.get(r,0) for r,e in er.items()):.2f} vs controls {st.mean(e["ctrl_newv"] for e in er.values()):.2f}); unfair to the catalogue: controls keep their own summoned and sweeping arrivals')
