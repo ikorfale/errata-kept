@@ -1,0 +1,5 @@
+# Hashes quoted in threads and PREREG files are of LF bytes; keep every checkout LF.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.zip binary
